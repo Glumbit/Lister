@@ -1,0 +1,174 @@
+.anime__filter {
+  background-color: var(--color2);
+  position: relative;
+  padding-bottom: 72px;
+}
+
+.filter__show {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+}
+
+.anime__item:hover .details {
+  height: auto;
+  width: 350px;
+  padding: 20px;
+  opacity: 1;
+  transform: translateX(103%);
+}
+
+.wrapper-anime {
+  position: relative;
+  width: 180px;
+  margin: 0 auto;
+}
+
+.preview {
+  position: relative;
+  border-radius: 5px;
+  height: 270px;
+  margin: 0 auto;
+}
+.preview:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  background-image: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.6) 80%);
+  border-radius: inherit;
+}
+
+.background {
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.info {
+  position: absolute;
+  height: 100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+}
+
+.rating {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+}
+
+.details {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--SpecialColor2);
+  z-index: 5;
+  border-radius: 5px;
+  width: 0;
+  padding: 0;
+  transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
+  opacity: 0;
+  transform: translateX(80%);
+}
+.details a {
+  text-decoration: underline;
+  color: var(--SpecialColor3);
+}
+.details a:hover {
+  text-decoration: none;
+}
+
+.different {
+  opacity: 0.7;
+}
+
+.description {
+  max-height: 190px;
+}
+
+.grey {
+  filter: grayscale(1);
+}
+
+.nice {
+  box-shadow: 0px 0px 20px 4px var(--SpecialColor2);
+}
+
+.link-anime {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  position: absolute;
+  display: block;
+  z-index: 4;
+}
+
+.label {
+  cursor: pointer;
+}
+.label:hover {
+  background-color: var(--color1);
+}
+
+.btn-filter {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background-color: var(--SpecialColor2);
+  z-index: 5;
+  border: 0;
+  outline: 0;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+.form-check-input {
+  background-color: inherit;
+  border: 2px solid var(--FontColor);
+}
+.form-check-input:checked {
+  background-color: var(--SpecialColor2);
+  border: 2px solid var(--SpecialColor2);
+}
+.form-check-input:focus {
+  border: 2px solid var(--SpecialColor2);
+  box-shadow: none;
+}
+
+.page-numbers {
+  background-color: var(--SpecialColor2);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+@media (max-width: 700px) {
+  .details {
+    display: none;
+  }
+}
+@media (max-width: 992px) {
+  .anime__filter {
+    height: 100vh;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+  }
+  .filter__show {
+    bottom: 72px;
+  }
+}/*# sourceMappingURL=anime.css.map */

@@ -1,0 +1,122 @@
+.bg1 {
+	background-color: var(--color1);
+}
+
+.bg2 {
+	background-color: var(--color2);
+}
+
+.bgs2 {
+	background-color: var(--SpecialColor2);
+}
+
+.fc2 {
+	color: var(--FontColor);
+}
+
+.spacer {
+	height: 75px;
+}
+
+.logo {
+	border-radius: 5px;
+	padding: 10px 20px;
+	width: 170px;
+	position: relative;
+}
+
+.logo__img {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 40px;
+}
+
+.form-control {
+	border: 0;
+	color: var(--FontColor);
+
+	&:focus {
+		background-color: var(--color1);
+		color: inherit;
+		box-shadow: none;
+	}
+}
+
+.navbar-brand {
+	display: block;
+	padding: 0;
+	margin: 0;
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 39px;
+	position: relative;
+	z-index: 5;
+}
+
+.navbar-nav {
+	overflow: hidden;
+	position: relative;
+}
+
+.nav-item {
+	display: block;
+	position: relative;
+	overflow-X: hidden;
+	border-radius: 5px;
+
+	&:hover {
+		background-color: var(--color1);
+	}
+}
+
+.menu-item {
+	display: block;
+	position: relative;
+	overflow-X: hidden;
+	border-radius: 5px;
+
+	&:hover {
+		background-color: var(--color1);
+	}
+
+	a {
+		line-height: 29px;
+		font-size: 1.5rem;
+		display: block;
+		padding: 8px;
+	}
+}
+
+.nav-link {
+	line-height: 29px;
+	font-size: 1.5rem;
+	display: block;
+}
+
+.subtitle {
+	font-size: 1.5rem;
+}
+
+.btn {
+	width: max-content;
+	background-color: var(--SpecialColor2);
+	border-radius: 5px;
+	color: var(--FontColor);
+	transition: background 300ms ease-in-out;
+
+	&:hover {
+		background-color: #e98246;
+	}
+}
+
+.container {
+	max-width: 1440px;
+	margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+	.search {
+		width: 100%;
+	}
+}
