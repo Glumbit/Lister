@@ -90,7 +90,7 @@ Template Name: Home
 												<img src="<?php the_field('image'); ?>" alt="favorite">
 											</div>
 											<p class="text-center subtitle">
-												<?php the_title();?>
+												<?php the_title();?> 
 											</p>
 											<?php the_content();?>
 											<p class="description">Описание: <?php the_field('description');?></p>
