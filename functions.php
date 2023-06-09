@@ -1,9 +1,10 @@
 <?php
-add_action( 'wp_enqueue_scripts', 'add_jquery');
-add_action( 'wp_enqueue_scripts', 'add_bootstrap');
+// add_action( 'wp_enqueue_scripts', 'add_jquery');
+// add_action( 'wp_enqueue_scripts', 'add_bootstrap');
 add_action( 'wp_enqueue_scripts', 'add_variables');
 add_action( 'wp_enqueue_scripts', 'add_reseting');
 add_action( 'wp_enqueue_scripts', 'add_blocks');
+add_action( 'wp_enqueue_scripts', 'add_header');
 add_action( 'wp_enqueue_scripts', 'add_home');
 add_action( 'wp_enqueue_scripts', 'add_anime');
 add_action( 'wp_enqueue_scripts', 'add_animeSingle');
@@ -41,6 +42,11 @@ function add_blocks ()
 	wp_enqueue_style( 'blocks-style' );
 };
 
+function add_header ()
+{
+	wp_register_style('header-style', get_template_directory_uri() . '/assets/css/header/header.css' );
+	wp_enqueue_style( 'header-style' );
+};
 
 function add_home ()
 {
@@ -149,6 +155,24 @@ function register_menu(){
 
 
 add_filter('show_admin_bar', '__return_false');
+add_filter( 'nav_menu_item_id', 'filter_menu_item_id', 10, 4 );
+
+function filter_menu_item_id($menu_id, $item, $args, $depth){
+	return '';
+}
+
+add_filter( 'nav_menu_css_class', 'filter_menu_item_class', 10, 4 );
+
+function filter_menu_item_class($classes, $item, $args, $depth){
+	$classes = array(
+		'nav__item',
+	);
+
+	if($item -> current){
+		$classes [] ='nav__item--active';
+	}
+	return $classes;
+}
 add_theme_support('post-thumbnails');
 add_theme_support('title-tag');
 add_theme_support('custom-logo');

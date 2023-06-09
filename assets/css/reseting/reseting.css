@@ -1,10 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
   font-family: var(--fontText);
-  background-color: var(--color1);
-  color: var(--FontColor);
+  background-color: var(--colorVioletDark);
+  color: var(--colorWhite);
 }
 
 img {
@@ -21,6 +25,8 @@ a:hover {
 
 ul {
   padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 section {
@@ -29,4 +35,20 @@ section {
 
 input {
   border: 0;
+}
+input:focus {
+  border: 0;
+  outline: 0;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
 }/*# sourceMappingURL=reseting.css.map */

@@ -1,3 +1,21 @@
+.anime__list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 180px);
+	gap: 30px;
+}
+
+.anime__item {
+	position: relative;
+}
+
+.anime__link {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
 .anime__filter {
 	background-color: var(--color2);
 	position: relative;
@@ -12,6 +30,7 @@
 }
 
 .anime__item {
+	position: relative;
 
 	&:hover .details {
 		height: auto;
@@ -22,22 +41,22 @@
 	}
 }
 
-.wrapper-anime {
-	position: relative;
-	width: 180px;
-	margin: 0 auto;
-}
-
 .preview {
 	position: relative;
 	border-radius: 5px;
 	height: 270px;
-	margin: 0 auto;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	overflow: hidden;
 
 	&:before {
 		content: '';
-		width: 100%;
-		height: 100%;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
 		position: absolute;
 		z-index: 2;
 		background-image: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.6) 80%);
@@ -45,29 +64,65 @@
 	}
 }
 
+.preview--great {
+	box-shadow: 0px 0px 10px 1px var(--colorOrange);
+}
+
 .background {
 	z-index: 1;
 	position: absolute;
-	width: 100%;
-	height: 100%;
-	border-radius: inherit;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
 	user-select: none;
+	height: 100%;
 }
 
 .info {
 	position: absolute;
-	height: 100px;
+	bottom: 0;
 	left: 0;
 	right: 0;
-	bottom: 0;
+	height: 100px;
+	padding: 10px;
 	z-index: 4;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.info__name {
+	font-size: 1.25rem;
+	font-weight: 500s;
 }
 
 .rating {
-	position: absolute;
-	bottom: 10px;
-	left: 0;
-	right: 0;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.rating--hide {
+	display: none;
+}
+
+.rating__numbers {
+	font-size: 1.125rem;
+	font-weight: 500;
+}
+
+.rating__visual {
+	// display: flex;
+	// justify-content: flex-start;
+	flex-grow: 1;
+	display: grid;
+	grid-template-columns: repeat(3, 30px);
+	gap: 17px;
+}
+
+.rating__star {
+	// width: 30px;
 }
 
 .details {
@@ -101,12 +156,8 @@
 	max-height: 190px;
 }
 
-.grey {
+.background--no {
 	filter: grayscale(1);
-}
-
-.nice {
-	box-shadow: 0px 0px 20px 4px var(--SpecialColor2);
 }
 
 .link-anime {
