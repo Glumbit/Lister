@@ -1,7 +1,22 @@
+.anime__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
 .anime__list {
+  flex-grow: 1;
+}
+
+.anime__items {
   display: grid;
   grid-template-columns: repeat(auto-fill, 180px);
+  justify-content: center;
   gap: 30px;
+  background: var(--colorViolet);
+  padding: 30px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .anime__item {
@@ -17,27 +32,23 @@
 }
 
 .anime__filter {
-  background-color: var(--color2);
+  background-color: var(--colorViolet);
   position: relative;
   padding-bottom: 72px;
-}
-
-.filter__show {
-  position: absolute;
-  bottom: 24px;
-  left: 0;
-  right: 0;
+  border-radius: 10px;
+  padding: 20px;
 }
 
 .anime__item {
   position: relative;
 }
 .anime__item:hover .details {
-  height: auto;
-  width: 350px;
-  padding: 20px;
   opacity: 1;
-  transform: translateX(103%);
+  transform: translateX(100%);
+}
+
+.anime__item--overflow:hover .details {
+  transform: translateX(-100%);
 }
 
 .preview {
@@ -66,7 +77,16 @@
   box-shadow: 0px 0px 10px 1px var(--colorOrange);
 }
 
-.background {
+.anime__link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.anime__background {
   z-index: 1;
   position: absolute;
   top: 0;
@@ -94,7 +114,10 @@
 
 .info__name {
   font-size: 1.25rem;
-  font-weight: 500s;
+  font-weight: 500;
+  max-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .rating {
@@ -119,15 +142,23 @@
   gap: 17px;
 }
 
+.rating__star {
+  pointer-events: none;
+}
+
 .details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   position: absolute;
+  width: 300px;
+  padding: 20px;
   top: 0;
-  right: 0;
-  background-color: var(--SpecialColor2);
+  right: -30px;
+  background-color: var(--colorOrange);
   z-index: 5;
   border-radius: 5px;
-  width: 0;
-  padding: 0;
+  pointer-events: none;
   transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
   opacity: 0;
   transform: translateX(80%);
@@ -140,12 +171,25 @@
   text-decoration: none;
 }
 
+.details--left {
+  left: -30px;
+  right: auto;
+  transform: translateX(-80%);
+}
+
+.details__title {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
 .different {
   opacity: 0.7;
 }
 
 .description {
   max-height: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .background--no {
@@ -162,51 +206,85 @@
   z-index: 4;
 }
 
-.label {
-  cursor: pointer;
-}
-.label:hover {
-  background-color: var(--color1);
-}
-
-.btn-filter {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  background-color: var(--SpecialColor2);
-  z-index: 5;
-  border: 0;
-  outline: 0;
-  border-radius: 50%;
-  box-shadow: none;
-}
-
-.form-check-input {
-  background-color: inherit;
-  border: 2px solid var(--FontColor);
-}
-.form-check-input:checked {
-  background-color: var(--SpecialColor2);
-  border: 2px solid var(--SpecialColor2);
-}
-.form-check-input:focus {
-  border: 2px solid var(--SpecialColor2);
-  box-shadow: none;
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .page-numbers {
-  background-color: var(--SpecialColor2);
-  padding: 10px;
   border-radius: 5px;
+  background: var(--colorViolet);
+  padding: 5px 10px;
+}
+.page-numbers:hover {
+  background: #301d4b;
 }
 
-@media (max-width: 700px) {
+.anime__filter {
+  width: 20%;
+  min-width: 250px;
+}
+
+.labels {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.labels-anime {
+  margin-bottom: 20px;
+}
+
+.label {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label__input {
+  display: none;
+}
+.label__input:checked + .label__front:before {
+  left: 28px;
+}
+
+.label__front {
+  width: 50px;
+  height: 25px;
+  background: var(--colorVioletDark);
+  border-radius: 50px;
+  position: relative;
+}
+.label__front:before {
+  content: "";
+  border-radius: 50px;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  background: var(--colorOrange);
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: left 500ms;
+}
+
+.btn-anime {
+  width: 100%;
+  background: var(--colorOrange);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+@media (max-width: 780px) {
   .details {
     display: none;
   }
 }
 @media (max-width: 992px) {
   .anime__filter {
+    display: none;
     height: 100vh;
     position: fixed;
     top: 50px;

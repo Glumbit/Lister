@@ -8,8 +8,9 @@ Template Name: Anime List
 	?>
 	<main>
 		<section class="anime">
-			<div class="container">
+			<div class="anime__inner container">
 				<div class="anime__list">
+					<div class="anime__items">
 					<?php 
 						global $query;
 						$query = new WP_Query( [
@@ -24,14 +25,14 @@ Template Name: Anime List
 								$query->the_post();
 								?>
 									<div class="anime__item">
-										<a href="<?php the_permalink( )?>" class="anime__link"></a>
 										<div class="preview <?php if(get_field('rating') == 3) {echo 'preview--great';}?>">
-											<img class="background <?php if(!get_field('status')) {echo 'background--no';}?>" src="<?php the_field('image'); ?>" alt="">
+											<a href="<?php the_permalink( )?>" class="anime__link"></a>
+											<img class="anime__background <?php if(!get_field('status')) {echo 'background--no';}?>" src="<?php the_field('image'); ?>" alt="">
 											<div class="info">
-												<p class="info__name">
+												<a href="<?php the_permalink( )?>" class="info__name">
 													<?php the_title(); ?>
-												</p>
-												<div class="rating <?php if (!get_field('rating')) {	echo "rating--hide";
+												</a>
+												<div class="rating <?php if (!get_field('status')) {	echo "rating--hide";
 												}?>">
 													<div class="rating__numbers">
 														<p class="awwda">
@@ -50,34 +51,33 @@ Template Name: Anime List
 														?>
 													</div>
 												</div>
-												
 											</div>
 										</div>
-										<div class="details  overflow-hidden">
-											<p class="subtitle overflow-hidden m-0">
+										<div class="details">
+											<p class="details__item details__title">
 												<?php 
 												the_title();?>
 											</p>
-											<p class="different mb-1">
+											<p class="details__item different">
 												<?php the_field('names');?>
 											</p>
-											<p class="serial mb-1">
+											<p class="details__item">
 												<span class="fw-semibold">Серия:</span> <?php the_field('serial');?>
 											</p>
-											<p class="studio mb-1">
+											<p class="details__item">
 												<span class="fw-semibold">Студия:</span> <?php the_field('studio');?>
 											</p>
-											<p class="description overflow-hidden mb-1">
+											<p class="details__item description">
 												<span class="fw-semibold">Описание:</span> <?php the_field('description');?>
 											</p>
-											<p class="genres mb-1 text-break"><span class="fw-semibold">Жанры:</span> <?php the_terms( get_the_ID(), "genres", '', ', ','' ); ?></p>
-											<p class="description overflow-hidden mb-1">
+											<p class="details__item genres"><span class="fw-semibold">Жанры:</span> <?php the_terms( get_the_ID(), "genres", '', ', ','' ); ?></p>
+											<p class="details__item">
 												<span class="fw-semibold">Дата выхода:</span> <?php the_field('date-create');?>
 											</p>
-											<p class="description overflow-hidden mb-1">
+											<p class="details__item">
 												<span class="fw-semibold">Дата просмотра:</span> <?php the_field('date-watch');?>
 											</p>
-											<p class="description overflow-hidden mb-1">
+											<p class="details__item">
 												<span class="fw-semibold">Статус:</span> 
 												<?php 
 													if (get_field('status')) {
@@ -94,32 +94,43 @@ Template Name: Anime List
 							} wp_reset_postdata();
 						}
 					?>
-				</div>
-				<div class="anime__filter pt-4 rounded" id="anime__filter">
-						<form method="get">
-							<?php 
-							$terms = get_terms( ['taxonomy' => 'genres',] );
-							foreach( $terms as $term ) {
-								echo 
-								'<label class="label d-flex justify-content-between p-2 rounded">
-									<span class="label__text">'.$term->name.': </span>
-									<input class="form-check-input" name type="checkbox" value="" id="'.$term->name.'">
-								</label>';
-							}?>
-							<div class="d-flex justify-content-center filter__show">
-								<button type=submit class="btn d-block" id="filter__submit">Подтвердить</button>
-							</div>
-						</form>
 					</div>
-				<div class="pagination justify-content-center">
+					<div class="pagination">
 						<?php 
 							echo paginate_links( [
 								'current' => max( 1, get_query_var( 'paged' ) ),
 								'total'   => $query->max_num_pages,
+								'mid_size' => 0,
 							] );
 						?>
+					</div>
+				</div>
+				<div class="anime__filter" id="anime__filter">
+					<form method="get">
+						<div class="labels labels-anime">
+							<?php 
+							$terms = get_terms( ['taxonomy' => 'genres',] );
+							foreach( $terms as $term ) {
+								echo 
+								'<label class="label">
+									<span class="label__text">'.$term->name.': </span>
+									<input class="label__input" name="'.$term->slug.'" type="checkbox" value="" id="'.$term->name.'">
+									<div class="label__front"></div>
+								</label>';
+							}?>
+						</div>
+						<button type=submit class="btn btn-anime" id="filter__submit">Подтвердить</button>
+					</form>
 				</div>
 			</div>
+			<!-- <div class="pagination">
+				<?php 
+					echo paginate_links( [
+						'current' => max( 1, get_query_var( 'paged' ) ),
+						'total'   => $query->max_num_pages,
+					] );
+				?>
+			</div> -->
 			<!-- <?php
 			if (isset($_REQUEST[$terms])) {
 				global $wp_query;
@@ -131,11 +142,11 @@ Template Name: Anime List
 				
 			}
 			?> -->
-			<button class="btn-filter p-2 d-lg-none">
+			<!-- <button class="btn-filter p-2 d-lg-none">
 				<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-filter fc2" viewBox="0 0 16 16">
 					<path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
 				</svg>
-			</button>
+			</button> -->
 		</section>
 	</main>
 	<?php get_footer(); ?>

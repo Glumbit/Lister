@@ -57,7 +57,7 @@ function add_home ()
 function add_anime ()
 {
 	wp_register_style('anime-style', get_template_directory_uri() . '/assets/css/anime/anime.css' );
-	wp_register_script('anime-script', get_template_directory_uri() . './assets/js/anime.js', array('jquery'), '0.1', true);
+	wp_register_script('anime-script', get_template_directory_uri() . '/assets/js/anime.js');
 	wp_enqueue_style( 'anime-style' );
 	wp_enqueue_script( 'anime-script');
 };
