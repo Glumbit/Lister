@@ -38,83 +38,70 @@ Template Name: Home
 						} wp_reset_postdata(); ?>
 						<ul class="stat">
 							<li class="stat__item">
-								<div class="stat__content">
-									<div class="stat__front">
-										<div class="stat__img">
-											<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
-										</div>
-										<p class="subtitle-stat">Количество аниме</p>
+								<div class="stat__front">
+									<div class="stat__img">
+										<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
 									</div>
-									<div class="stat__back">
-										<p class="stat__result"><?php echo wp_count_posts('anime')->publish;?></p>
-									</div>
+									<p class="subtitle-stat">Количество аниме</p>
+								</div>
+								<div class="stat__back">
+									<p class="stat__result"><?php echo wp_count_posts('anime')->publish;?></p>
 								</div>
 							</li>
 							<li class="stat__item">
-								<div class="stat__content">
-									<div class="stat__front">
-										<div class="stat__img">
-											<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
-										</div>
-										<p class="subtitle-stat">Средняя оценка</p>
+								<div class="stat__front">
+									<div class="stat__img">
+										<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
 									</div>
-									<div class="stat__back">
-										<p class="stat__result"><?php echo round($rating, 1);?></p>
-									</div>
+									<p class="subtitle-stat">Средняя оценка</p>
+								</div>
+								<div class="stat__back">
+									<p class="stat__result"><?php echo round($rating, 1);?></p>
 								</div>
 							</li>
 							<li class="stat__item">
-								<div class="stat__content">
-									<div class="stat__front">
-										<div class="stat__img">
-											<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
-										</div>
-										<p class="subtitle-stat">Средняя оценка</p>
+								<div class="stat__front">
+									<div class="stat__img">
+										<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
 									</div>
-									<div class="stat__back">
-										<p class="stat__result"><?php echo round($rating, 1);?></p>
-									</div>
+									<p class="subtitle-stat">Средняя оценка</p>
+								</div>
+								<div class="stat__back">
+									<p class="stat__result"><?php echo round($rating, 1);?></p>
 								</div>
 							</li>
 							<li class="stat__item">
-								<div class="stat__content">
-									<div class="stat__front">
-										<div class="stat__img">
-											<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
-										</div>
-										<p class="subtitle-stat">Средняя оценка</p>
+								<div class="stat__front">
+									<div class="stat__img">
+										<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
 									</div>
-									<div class="stat__back">
-										<p class="stat__result">Романтика</p>
-									</div>
+									<p class="subtitle-stat">Средняя оценка</p>
+								</div>
+								<div class="stat__back">
+									<p class="stat__result">Романтика</p>
 								</div>
 							</li>
 							<li class="stat__item">
-								<div class="stat__content">
-									<div class="stat__front">
-										<div class="stat__img">
-											<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
-										</div>
-										<p class="subtitle-stat">Средняя оценка</p>
+								<div class="stat__front">
+									<div class="stat__img">
+										<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
 									</div>
-									<div class="stat__back">
-										<p class="stat__result"><?php echo round($rating, 1);?></p>
-									</div>
+									<p class="subtitle-stat">Средняя оценка</p>
+								</div>
+								<div class="stat__back">
+									<p class="stat__result"><?php echo round($rating, 1);?></p>
 								</div>
 							</li>
 							<li class="stat__item">
-								<div class="stat__content">
-									<div class="stat__front">
-										<div class="stat__img">
-											<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
-										</div>
-										<p class="subtitle-stat">Средняя оценка</p>
+								<div class="stat__front">
+									<div class="stat__img">
+										<img src="<?php bloginfo('template_url')?>/assets/images/anime/star.png" alt="">
 									</div>
-									<div class="stat__back">
-										<p class="stat__result"><?php echo round($rating, 1);?></p>
-									</div>
+									<p class="subtitle-stat">Средняя оценка</p>
 								</div>
-								
+								<div class="stat__back">
+									<p class="stat__result"><?php echo round($rating, 1);?></p>
+								</div>
 							</li>
 						</ul>
 					</div>

@@ -70,10 +70,8 @@
 // 	}
 // });
 
-console.log('working ...');
-
-document.addEventListener('DOMContentLoaded', animeDetailsOverflow)
-window.addEventListener('resize', animeDetailsOverflow)
+document.addEventListener('DOMContentLoaded', animeDetailsOverflow);
+window.addEventListener('resize', animeDetailsOverflow);
 
 function animeDetailsOverflow() {
 	const animeItemsHtml = document.getElementsByClassName('anime__item');
@@ -84,11 +82,25 @@ function animeDetailsOverflow() {
 			const animeDetails = animeItem.querySelector(".details")
 			animeItem.classList.remove("anime__item--overflow");
 			animeDetails.classList.remove("details--left");
-			console.log(animeDetails.getBoundingClientRect().right, (animeDetails.offsetWidth * 0.2), document.querySelector(".anime__list").offsetWidth, animeItem, animeDetails);
 			if (animeDetails.getBoundingClientRect().right + (animeDetails.offsetWidth * 0.2) > window.innerWidth) {
 				animeItem.classList.add("anime__item--overflow");
 				animeDetails.classList.add("details--left");
 			}
 		}
 	}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+	// console.log(document.querySelector('.filter__btn'));
+	if (window.innerWidth < 992) {
+		const filter = document.querySelector('.filter__btn');
+		filter.addEventListener("click", filterShow);
+	}
+});
+
+
+console.log(window.innerWidth);
+function filterShow() {
+	console.log("doawijd");
+	document.querySelector('.filter').classList.add('filter--show');
 }

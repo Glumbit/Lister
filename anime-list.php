@@ -5,6 +5,9 @@ Template Name: Anime List
 ?>
 	<?php 
 	get_header();
+	// echo "<pre>";
+	// print_r($_REQUEST);
+	// echo "</pre>";
 	?>
 	<main>
 		<section class="anime">
@@ -13,13 +16,49 @@ Template Name: Anime List
 					<div class="anime__items">
 					<?php 
 						global $query;
+
 						$query = new WP_Query( [
 							'post_type' => 'anime',
-							'posts_per_page' => 5,
+							'posts_per_page' => 6,
 							'paged' => get_query_var( 'paged' ),
 							'type' => 'list',
 						] );
 
+						if (isset($_REQUEST['filter'])) {
+							$genres = [];
+							$status =[];
+							if(isset($_REQUEST['filter']['genres'])){
+								$genres = array(
+								array(
+								"taxonomy" => "genres",
+								"field" => "id",
+								"terms" => $_REQUEST['filter']['genres'],
+								)
+							);
+							}
+							if(isset($_REQUEST['filter']['watched'])){
+								$status = array(
+									array(
+											'key' => 'status',
+											'value' => true,
+											'compare' => '=',
+											'type' => 'bool',
+									)
+								);
+							}
+							
+							$query = new WP_Query( [
+								'post_type' => 'anime',
+								'posts_per_page' => 6,
+								'paged' => get_query_var( 'paged' ),
+								'type' => 'list',
+								'tax_query' => $genres,
+								'meta_query' => $status,
+							] );
+							// echo "<pre>";
+							// print_r($query -> query);
+							// echo "</pre>";
+						}
 						if ($query->have_posts()) {
 							while ($query->have_posts()) {
 								$query->the_post();
@@ -105,23 +144,50 @@ Template Name: Anime List
 						?>
 					</div>
 				</div>
-				<div class="anime__filter" id="anime__filter">
-					<form method="get">
-						<div class="labels labels-anime">
-							<?php 
-							$terms = get_terms( ['taxonomy' => 'genres',] );
-							foreach( $terms as $term ) {
-								echo 
-								'<label class="label">
-									<span class="label__text">'.$term->name.': </span>
-									<input class="label__input" name="'.$term->slug.'" type="checkbox" value="" id="'.$term->name.'">
-									<div class="label__front"></div>
-								</label>';
-							}?>
-						</div>
-						<button type=submit class="btn btn-anime" id="filter__submit">Подтвердить</button>
-					</form>
+				<div class="filter filter-anime" id="anime__filter">
+					<div class="filter__inner-anime">
+						<h2 class="filter__title">Фильтры</h2>
+						<form method="get">
+							<div class="filter__labels filter__labels-anime">
+								<h4 class="filter__category">
+									Жанры
+								</h4>
+								<?php 
+								$terms = get_terms( ['taxonomy' => 'genres',] );
+								foreach( $terms as $term ) {
+									?>
+									<label class="label">
+										<span class="label__text"><?php echo $term->name?>: </span>
+										<input class="label__input" <?php
+											if (isset($_REQUEST['filter']['genres'])) {
+												for ($i=0; $i < count($_REQUEST['filter']['genres']); $i++) {
+													$genreID = $_REQUEST['filter']['genres'][$i];
+													if ($genreID == $term->term_id) {
+														echo "checked";
+													}
+												}
+											}
+										?> name="filter[genres][]" type="checkbox" value="<?php echo $term->term_id ?>" id="">
+										<div class="label__front"></div>
+									</label>
+									<?php
+								}?>
+							</div>
+							<div class="filter__labels filter__labels-anime">
+								<h4 class="filter__category">
+									Прочее
+								</h4>
+								<label class="label">
+										<span class="label__text">Просмотрено: </span>
+										<input class="label__input" <?php if(isset($_REQUEST['filter']['watched'])){echo "checked";}?> name="filter[watched][]" type="checkbox" value="<?php echo true?>" id="">
+										<div class="label__front"></div>
+								</label>
+							</div>
+							<button type=submit class="btn btn-anime" id="filter__submit">Подтвердить</button>
+						</form>
+					</div>
 				</div>
+				<button class="filter__btn">Фильтры</button>
 			</div>
 			<!-- <div class="pagination">
 				<?php 

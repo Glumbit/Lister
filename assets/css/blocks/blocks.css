@@ -41,6 +41,11 @@
   margin: 0 auto;
 }
 
+@media (max-width: 1440px) {
+  .container {
+    margin: 0 30px;
+  }
+}
 @media (max-width: 768px) {
   .search {
     width: 100%;
