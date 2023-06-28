@@ -1,16 +1,16 @@
 <?php
 /*
-Template Name: Single anime
+Template Name: Single games
 */
 ?>
 <?php get_header();?>
 <main>
-	<section class="single-anime">
-		<div class="single-anime__container container">
+	<section class="single-games">
+		<div class="single-games__container container">
 			<?php
 				$currentSerial = get_field('serial');
 				$querySingle = new WP_Query([
-					'post_type' => 'anime',
+					'post_type' => 'games',
 					'meta_query' => array(
 						array(
 								'key' => 'serial',
@@ -24,16 +24,16 @@ Template Name: Single anime
 				]);
 				if ( have_posts() ) : while ( have_posts() ) : the_post(); 
 			?>
-				<div class="single-anime__info info">
-					<div class="single-anime__col col">
-						<div class="single-anime__img">
+				<div class="single-games__info info">
+					<div class="single-games__col col">
+						<div class="single-games__img">
 							<img src="<?php the_field('image'); ?>" alt="">
 						</div>
 						<div class="list__outside">
 							<input type="checkbox" id="info__meta" class="input_hide">
-							<div class="single-anime__list list list_show">
+							<div class="single-games__list list list_show">
 								<div class="list__item">
-									<p class="single-anime__list-title list-title">
+									<p class="single-games__list-title list-title">
 										Оригинальное название
 									</p>
 									<p class="list__data">
@@ -41,7 +41,7 @@ Template Name: Single anime
 									</p>
 								</div>
 								<div class="list__item">
-									<p class="single-anime__list-title list-title">
+									<p class="single-games__list-title list-title">
 										Серия
 									</p>
 									<p class="list__data">
@@ -49,7 +49,7 @@ Template Name: Single anime
 									</p>
 								</div>
 								<div class="list__item">
-									<p class="single-anime__list-title list-title">
+									<p class="single-games__list-title list-title">
 										Студия
 									</p>
 									<p class="list__data">
@@ -57,18 +57,20 @@ Template Name: Single anime
 									</p>
 								</div>
 								<div class="list__item">
-									<p class="single-anime__list-title list-title">
+									<p class="single-games__list-title list-title">
 										Тип
 									</p>
 									<p class="list__data">
-										<?php the_field('type');?>
+										<?php $temp = get_field_object('type');
+												echo $temp["value"]["label"];
+										?>
 									</p>
 								</div>
 								<?php
 									if(get_post_meta( get_the_ID(), "type", true)=="Сериал"){
 										?>
 											<div class="list__item">
-												<p class="single-anime__list-title list-title">
+												<p class="single-games__list-title list-title">
 													Количество серий
 												</p>
 												<p class="list__data">
@@ -82,7 +84,7 @@ Template Name: Single anime
 									if(get_post_meta( get_the_ID(), "type", true)=="Фильм"){
 										?>
 											<div class="list__item">
-												<p class="single-anime__list-title list-title">
+												<p class="single-games__list-title list-title">
 													Длительность
 												</p>
 												<p class="list__data">
@@ -95,7 +97,7 @@ Template Name: Single anime
 									}
 								?>
 								<div class="list__item">
-									<p class="single-anime__list-title list-title">
+									<p class="single-games__list-title list-title">
 										Дата выхода
 									</p>
 									<p class="list__data">
@@ -103,26 +105,21 @@ Template Name: Single anime
 									</p>
 								</div>
 								<div class="list__item">
-									<p class="single-anime__list-title list-title">
-										Дата просмотра
+									<p class="single-games__list-title list-title">
+										Дата прохождения
 									</p>
 									<p class="list__data">
 										<?php the_field('date-watch');?>
 									</p>
 								</div>
 								<div class="list__item">
-									<p class="single-anime__list-title list-title">
+									<p class="single-games__list-title list-title">
 										Статус
 									</p>
 									<p class="list__data">
-										<?php 
-										if (get_field('status')) {
-											echo 'Просмотренно';
-										}
-										else {
-											echo 'Не просмотренно';
-										}
-									?>
+										<?php $temp = get_field_object('status');
+												echo $temp["value"]["label"];
+										?>
 									</p>
 								</div>
 							</div>
@@ -131,13 +128,13 @@ Template Name: Single anime
 							</div>
 						</div>
 					</div>
-					<div class="single-anime__col col">
-						<div class="single-anime__list list">
+					<div class="single-games__col col">
+						<div class="single-games__list list">
 							<p class="title_line-left title"> <?php 
 							echo get_the_title();
 							?></p>
 							<div class="list__item">
-								<p class="single-anime__list-title list-title">
+								<p class="single-games__list-title list-title">
 									Описание
 								</p>
 								<p class="list__data list__data_description">
@@ -145,16 +142,16 @@ Template Name: Single anime
 								</p>
 							</div>
 							<div class="list__item">
-								<p class="single-anime__list-title list-title">
+								<p class="single-games__list-title list-title">
 									Жанры
 								</p>
 								<div class="list__data genres">
 									<?php
-										$genresArr = get_the_terms(get_the_ID(),"genres-anime");
-										if(is_array(get_the_terms(get_the_ID(),"genres-anime"))){
+										$genresArr = get_the_terms(get_the_ID(),"genres-games");
+										if(is_array(get_the_terms(get_the_ID(),"genres-games"))){
 											for ($i=0; $i < count($genresArr); $i++) { 
 											?>
-												<a class="genres__item" href="<?php echo get_term_link($genresArr[$i] -> term_id, "genres-anime")?>">
+												<a class="genres__item" href="<?php echo get_term_link($genresArr[$i] -> term_id, "genres-games")?>">
 													<?php echo $genresArr[$i] -> name;?>
 												</a>
 											<?php
@@ -165,7 +162,7 @@ Template Name: Single anime
 							</div>
 						</div>
 					</div>
-					<div class="anime-single__rating">
+					<div class="games-single__rating">
 						<div class="progress-bar progress-bar_<?php echo get_field('rating')?>">
 						</div>
 						<div class="rating__visual">
@@ -181,7 +178,7 @@ Template Name: Single anime
 						</div>
 					</div>
 				</div>
-				<div class="single-anime__block">
+				<div class="single-games__block">
 					<h2 class="title_line-bottom title">Похожее</h2>
 					<div class="similar__items">
 						<?php
@@ -227,24 +224,24 @@ Template Name: Single anime
 					?>
 					</div>
 				</div>
-				<div class="single-anime__block shots">
+				<div class="single-games__block shots">
 					<h2 class="title_line-bottom title">Кадры</h2>
 					<div class="shots__items">
-						<div class="single-anime__shots-item shots-item">
+						<div class="single-games__shots-item shots-item">
 							<img src="<?php the_field('galery1'); ?>" alt="">
 						</div>
-						<div class="single-anime__shots-item shots-item">
+						<div class="single-games__shots-item shots-item">
 							<img src="<?php the_field('galery2'); ?>" alt="">
 						</div>
-						<div class="single-anime__shots-item shots-item">
+						<div class="single-games__shots-item shots-item">
 							<img src="<?php the_field('galery3'); ?>" alt="">
 						</div>
-						<div class="single-anime__shots-item shots-item">
+						<div class="single-games__shots-item shots-item">
 							<img src="<?php the_field('galery4'); ?>" alt="">
 						</div>
 					</div>
 				</div>
-				<div class="single-anime__block single-anime__block_trailer">
+				<div class="single-games__block single-games__block_trailer">
 					<h2 class="title_line-bottom title">Трейлер</h2>
 					<div class="video-wrapper">
 						<video controls="controls" src="<?php the_field('trailer');?>"></video>

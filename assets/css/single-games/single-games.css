@@ -1,18 +1,18 @@
 @charset "UTF-8";
-.single-anime__container {
+.single-games__container {
   background: var(--colorViolet);
   border-radius: 10px;
   padding: 30px;
 }
 
-.single-anime__block {
+.single-games__block {
   margin-bottom: 30px;
   background: var(--colorVioletDark);
   padding: 20px;
   border-radius: 10px;
 }
 
-.single-anime__info {
+.single-games__info {
   position: relative;
   z-index: 2;
   display: grid;
@@ -23,7 +23,7 @@
   margin-bottom: 80px;
 }
 
-.single-anime__col:nth-child(1) {
+.single-games__col:nth-child(1) {
   background: var(--colorVioletDark);
   border-radius: 10px;
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
@@ -32,16 +32,16 @@
   margin-bottom: 50px;
   grid-area: img;
 }
-.single-anime__col:nth-child(2) {
+.single-games__col:nth-child(2) {
   grid-area: info;
 }
 
-.single-anime__img {
+.single-games__img {
   border-radius: 10px 10px 0 0;
   aspect-ratio: 3/4;
   position: relative;
 }
-.single-anime__img img {
+.single-games__img img {
   border-radius: inherit;
   position: absolute;
   top: 0;
@@ -71,7 +71,7 @@
   border-radius: 0 0 10px 10px;
 }
 
-.single-anime__list {
+.single-games__list {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -100,7 +100,7 @@
   opacity: 0.7;
 }
 
-.single-anime__list-title {
+.single-games__list-title {
   margin-bottom: 10px;
 }
 
@@ -154,7 +154,7 @@
   padding: 7px 25px;
 }
 
-.anime-single__rating {
+.games-single__rating {
   width: 75%;
   margin: 0 auto;
   position: relative;
@@ -274,20 +274,20 @@
   gap: 20px;
 }
 
-.single-anime__shots-item {
+.single-games__shots-item {
   min-width: 200px;
   max-width: 25%;
   aspect-ratio: 16/9;
   border-radius: 10px;
   background: var(--colorViolet);
 }
-.single-anime__shots-item img {
+.single-games__shots-item img {
   border-radius: inherit;
   -o-object-fit: contain;
      object-fit: contain;
   height: 100%;
 }
 
-.single-anime__block_trailer {
+.single-games__block_trailer {
   margin-bottom: 0;
-}/*# sourceMappingURL=single-anime.css.map */
+}/*# sourceMappingURL=single-games.css.map */

@@ -1,26 +1,26 @@
 <?php
 /*
-Template Name: Anime List
+Template Name: games List
 */
 ?>
 	<?php 
 	get_header();
 	?>
 	<main>
-		<section class="anime">
-			<div class="anime__inner container">
-				<div class="anime__list">
-					<?php
+		<section class="games">
+			<div class="games__inner container">
+				<div class="games__list">
+					<?php 
 						global $query;
 						$query = new WP_Query( [
-							'post_type' => 'anime',
+							'post_type' => 'games',
 							'posts_per_page' => 30,
 							'paged' => get_query_var( 'paged' ),
 							'type' => 'list',
 						] );
 						if (isset($_REQUEST['filter'])) {
 							$genres = [];
-							$meta =[];
+							$status =[];
 							if(isset($_REQUEST['filter']['genres'])){
 								$genres = array(
 								array(
@@ -30,51 +30,38 @@ Template Name: Anime List
 								)
 							);
 							}
-
-							$meta = array();
-
 							if(isset($_REQUEST['filter']['watched'])){
-								$watched = 
+								$status = array(
 									array(
 											'key' => 'status',
 											'value' => true,
 											'compare' => '=',
 											'type' => 'bool',
-									);
-								array_push($meta, $watched);
-							}
-
-							if(isset($_REQUEST['filter']['type'])){
-								$type = 
-									array(
-											'key' => 'type',
-											'value' => $_REQUEST['filter']['type'],
-									);
-
-								array_push($meta, $type);
+									)
+								);
 							}
 							
 							$query = new WP_Query( [
-								'post_type' => 'anime',
+								'post_type' => 'games',
 								'posts_per_page' => 30,
 								'paged' => get_query_var( 'paged' ),
 								'type' => 'list',
 								'tax_query' => $genres,
-								'meta_query' => $meta,
+								'meta_query' => $status,
 							] );
 						}
 						if ($query->have_posts()) {
-							echo '<div class="anime__items">';
+							echo '<div class="games__items">';
 							while ($query->have_posts()) {
 								$query->the_post();
 								?>
-									<div class="anime__item">
+									<div class="games__item">
 										<div class="preview <?php if(get_field('rating') == 3) {echo 'preview--great';}?>">
-											<a href="<?php the_permalink( )?>" class="anime__link"></a>
-											<img class="anime__background <?php if(!get_field('status')) {echo 'background--no';}?>" src="<?php the_field('image'); ?>" alt="">
-											<div class="anime__info">
-												<a href="<?php the_permalink( )?>" class="info__name" rows="1">
-													<?php the_title() ?>
+											<a href="<?php the_permalink( )?>" class="games__link"></a>
+											<img class="games__background <?php if(!get_field('status')) {echo 'background--no';}?>" src="<?php the_field('image'); ?>" alt="">
+											<div class="games__info">
+												<a href="<?php the_permalink( )?>" class="games__title title">
+													<?php the_title(); ?>
 												</a>
 												<div class="rating <?php if (!get_field('status')) {	echo "rating--hide";
 												}?>">
@@ -88,7 +75,7 @@ Template Name: Anime List
 															for ($i=0; $i < get_field('rating'); $i++) { 
 																?>
 																<div class="rating__star">
-																	<img src="<?php bloginfo('template_url');?>/assets/images/anime/star.png">
+																	<img src="<?php bloginfo('template_url');?>/assets/images/games/star.png">
 																</div>
 																<?php
 															};
@@ -109,35 +96,26 @@ Template Name: Anime List
 												<span class="details__title">Серия:</span> <?php the_field('serial');?>
 											</p>
 											<p class="details__item">
-												<span class="details__title">Тип:</span> 
-												<?php 
-												$temp = get_field_object('type');
-												echo $temp["value"]["label"];?>
-											</p>
-											<p class="details__item">
-												<span class="details__title">Часть:</span> <?php the_field('part');?>
-											</p>
-											<p class="details__item">
 												<span class="details__title">Студия:</span> <?php the_field('studio');?>
 											</p>
 											<p class="details__item description">
 												<span class="details__title">Описание:</span> <?php the_field('description');?>
 											</p>
-											<p class="details__item genres"><span class="details__title">Жанры:</span> <?php the_terms( get_the_ID(), "genres-anime", '', ', ','' ); ?></p>
+											<p class="details__item"><span class="details__title">Жанры:</span> <?php the_terms( get_the_ID(), "genres-games", '', ', ','' ); ?></p>
 											<p class="details__item">
 												<span class="details__title">Дата выхода:</span> <?php the_field('date-create');?>
 											</p>
 											<p class="details__item">
-												<span class="details__title">Дата просмотра:</span> <?php the_field('date-watch');?>
+												<span class="details__title">Дата прохождения:</span> <?php the_field('date-watch');?>
 											</p>
 											<p class="details__item">
 												<span class="details__title">Статус:</span> 
 												<?php 
 													if (get_field('status')) {
-														echo 'Просмотренно';
+														echo 'Пройдено';
 													}
 													else {
-														echo 'Не просмотренно';
+														echo 'Не пройдено';
 													}
 												?>
 											</p>
@@ -163,11 +141,11 @@ Template Name: Anime List
 						?>
 					</div>
 				</div>
-				<div class="filter filter-anime" id="anime__filter">
-					<div class="filter__inner-anime">
+				<div class="filter filter-games" id="games__filter">
+					<div class="filter__inner-games">
 						<h2 class="title-filter">Фильтры</h2>
-						<form method="get" action="/anime-list">
-							<div class="filter__body filter__body-anime">
+						<form method="get" action="/games-list">
+							<div class="filter__body filter__body-games">
 								<div class="filter__header">
 									<label for="filter__show1" class="filter__trigger"></label>
 									<h4 class="filter__type">
@@ -177,7 +155,7 @@ Template Name: Anime List
 								<input class="filter__show" type="checkbox" id="filter__show1">
 								<div class="filter__labels">
 									<?php 
-									$terms = get_terms( ['taxonomy' => 'genres-anime',] );
+									$terms = get_terms( ['taxonomy' => 'genres-games',] );
 									foreach( $terms as $term ) {
 										?>
 										<label class="label">
@@ -198,7 +176,7 @@ Template Name: Anime List
 									}?>
 								</div>
 							</div>
-							<div class="filter__body filter__body-anime">
+							<div class="filter__body filter__body-games">
 								<div class="filter__header">
 									<label for="filter__show2" class="filter__trigger"></label>
 									<h4 class="filter__type">
@@ -214,48 +192,7 @@ Template Name: Anime List
 									</label>
 								</div>
 							</div>
-							<div class="filter__body filter__body-anime">
-								<div class="filter__header">
-									<label for="filter__show3" class="filter__trigger"></label>
-									<h4 class="filter__type">
-										Тип
-									</h4>
-								</div>
-								<input class="filter__show" type="checkbox" id="filter__show3">
-								<div class="filter__labels">
-									<label class="label">
-										<span class="label__text">Сериал: </span>
-										<input class="label__input" 
-											<?php 
-												if (isset($_REQUEST['filter'])) {
-													foreach ($_REQUEST['filter']['type'] as $type) {
-														if($type == "serial"){
-															echo "checked";
-														}
-													}
-												}
-											?> 
-											name="filter[type][]" type="checkbox" value="<?php echo "serial"?>" id="">
-										<div class="label__front"></div>
-									</label>
-									<label class="label">
-										<span class="label__text">Фильм: </span>
-										<input class="label__input" <?php 
-												if (isset($_REQUEST['filter'])) {
-													foreach ($_REQUEST['filter']['type'] as $type) {
-														if($type == "film"){
-															echo "checked";
-														}
-													}
-												}
-											?>
-											name="filter[type][]" type="checkbox" value="<?php echo "film"?>" id="">
-										<div class="label__front"></div>
-									</label>
-								</div>
-							</div>
-							<button type=submit class="btn btn-anime" id="filter__submit">Подтвердить</button>
-
+							<button type=submit class="btn btn-games" id="filter__submit">Подтвердить</button>
 						</form>
 					</div>
 				</div>

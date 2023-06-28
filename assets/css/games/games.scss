@@ -1,14 +1,14 @@
-.anime__inner {
+.games__inner {
 	display: flex;
 	align-items: flex-start;
 	gap: 30px;
 }
 
-.anime__list {
+.games__list {
 	flex-grow: 1;
 }
 
-.anime__items {
+.games__items {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, 180px);
 	justify-content: center;
@@ -19,7 +19,7 @@
 	margin-bottom: 20px;
 }
 
-.anime__link {
+.games__link {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -27,7 +27,7 @@
 	right: 0;
 }
 
-.filter-anime {
+.filter-games {
 	background-color: var(--colorViolet);
 	position: relative;
 	padding-bottom: 72px;
@@ -42,7 +42,7 @@
 // 	right: 0;
 // }
 
-.anime__item {
+.games__item {
 	position: relative;
 
 	&:hover .details {
@@ -51,7 +51,7 @@
 	}
 }
 
-.anime__item--overflow {
+.games__item--overflow {
 
 	&:hover {
 		.details {
@@ -87,7 +87,7 @@
 	box-shadow: 0px 0px 10px 1px var(--colorOrange);
 }
 
-.anime__link {
+.games__link {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -96,7 +96,7 @@
 	z-index: 3;
 }
 
-.anime__background {
+.games__background {
 	z-index: 1;
 	position: absolute;
 	top: 0;
@@ -107,7 +107,7 @@
 	height: 100%;
 }
 
-.anime__info {
+.info {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -123,7 +123,7 @@
 .info__name {
 	font-size: 1.25rem;
 	font-weight: 500;
-	max-height: 25px;
+	max-height: 50px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
@@ -187,23 +187,21 @@
 	word-wrap: break-word;
 }
 
-.details {
-	.different {
-		opacity: 0.7;
-	}
+.different {
+	opacity: 0.7;
+}
 
-	.description {
-		max-height: 190px;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
+.description {
+	max-height: 190px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .background--no {
 	filter: grayscale(1);
 }
 
-.link-anime {
+.link-games {
 	top: 0;
 	bottom: 0;
 	right: 0;
@@ -229,7 +227,7 @@
 	}
 }
 
-.filter-anime {
+.filter-games {
 	width: 20%;
 	min-width: 250px;
 	transition: transform 500ms;
@@ -268,7 +266,7 @@
 	padding: 20px;
 }
 
-.filter__body-anime {
+.filter__body-games {
 	margin-bottom: 20px;
 }
 
@@ -391,7 +389,7 @@
 	}
 }
 
-.btn-anime {
+.btn-games {
 	width: 100%;
 	background: var(--colorOrange);
 	font-size: 1rem;
@@ -425,29 +423,11 @@
 		flex-grow: 1;
 	}
 
-	.anime {
+	.games {
 		margin-bottom: 70px;
 	}
 
-	.filter__title {
-		// 		display: block;
-		// 		padding: 0 20px 10px;
-		// 		position: relative;
-		// 
-		// 		&:before {
-		// 			content: '';
-		// 			position: absolute;
-		// 			height: 3px;
-		// 			background: var(--colorOrange);
-		// 			border-radius: 5px;
-		// 			bottom: 0;
-		// 			left: 0;
-		// 			right: 0;
-		// 		}
-	}
-
-	.filter-anime {
-		// transform: translateX(-100%);
+	.filter-games {
 		width: 100vw;
 		position: fixed;
 		top: 0;

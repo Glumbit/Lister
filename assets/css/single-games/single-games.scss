@@ -1,17 +1,17 @@
-.single-anime__container {
+.single-games__container {
 	background: var(--colorViolet);
 	border-radius: 10px;
 	padding: 30px;
 }
 
-.single-anime__block {
+.single-games__block {
 	margin-bottom: 30px;
 	background: var(--colorVioletDark);
 	padding: 20px;
 	border-radius: 10px;
 }
 
-.single-anime__info {
+.single-games__info {
 	position: relative;
 	z-index: 2;
 	// display: flex;
@@ -26,7 +26,7 @@
 	margin-bottom: 80px;
 }
 
-.single-anime__col {
+.single-games__col {
 
 	&:nth-child(1) {
 		background: var(--colorVioletDark);
@@ -43,7 +43,7 @@
 	}
 }
 
-.single-anime__img {
+.single-games__img {
 	border-radius: 10px 10px 0 0;
 	aspect-ratio: 3/4;
 	position: relative;
@@ -88,7 +88,7 @@
 	border-radius: 0 0 10px 10px;
 }
 
-.single-anime__list {
+.single-games__list {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
@@ -118,7 +118,7 @@
 	opacity: 0.7;
 }
 
-.single-anime__list-title {
+.single-games__list-title {
 	margin-bottom: 10px;
 }
 
@@ -174,7 +174,7 @@
 	}
 }
 
-.anime-single__rating {
+.games-single__rating {
 	width: 75%;
 	margin: 0 auto;
 	position: relative;
@@ -311,7 +311,7 @@
 	gap: 20px;
 }
 
-.single-anime__shots-item {
+.single-games__shots-item {
 	min-width: 200px;
 	max-width: 25%;
 	aspect-ratio: 16 / 9;
@@ -325,6 +325,6 @@
 	}
 }
 
-.single-anime__block_trailer {
+.single-games__block_trailer {
 	margin-bottom: 0;
 }

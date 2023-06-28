@@ -1,28 +1,10 @@
 <?php
-// add_action( 'wp_enqueue_scripts', 'add_jquery');
-// add_action( 'wp_enqueue_scripts', 'add_bootstrap');
 add_action( 'wp_enqueue_scripts', 'add_variables');
 add_action( 'wp_enqueue_scripts', 'add_reseting');
 add_action( 'wp_enqueue_scripts', 'add_blocks');
 add_action( 'wp_enqueue_scripts', 'add_header');
-add_action( 'wp_enqueue_scripts', 'add_home');
-add_action( 'wp_enqueue_scripts', 'add_anime');
-add_action( 'wp_enqueue_scripts', 'add_animeSingle');
+add_action( 'wp_enqueue_scripts', 'page_type_validation');
 add_action( 'after_setup_theme', 'register_menu' );
-
-function add_jquery() {
-	wp_deregister_script( 'jquery');
-	wp_register_script( 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js', array(), '0.1', true);
-	wp_enqueue_script( 'jquery' );
-};
-
-function add_bootstrap ()
-{
-	wp_register_style('bootstrap-style', get_template_directory_uri() . '/assets/bootstrap/bootstrap.min.css' );
-	wp_register_script('bootstrap-script', get_template_directory_uri() . '/assets/bootstrap/bootstrap.bundle.min.js', array('jquery'), '5.2.3', true);
-	wp_enqueue_style( 'bootstrap-style' );
-	wp_enqueue_script( 'bootstrap-script');
-};
 
 function add_variables ()
 {
@@ -48,6 +30,32 @@ function add_header ()
 	wp_enqueue_style( 'header-style' );
 };
 
+function page_type_validation() {
+	if (is_home()) {
+		add_home();
+		return;
+	}
+	if (get_page_uri() == "anime-list") {
+		add_anime();
+		return;
+	}
+	if (get_page_uri() == "games-list") {
+		add_games();
+		return;
+	}
+	if (is_single()) {
+		echo get_post_type();
+		if (get_post_type() == "games") {
+			add_gamesSingle();
+			return;
+		}
+		if (get_post_type() == "anime") {
+			add_animeSingle();
+			return;
+		}
+	}
+}
+
 function add_home ()
 {
 	wp_register_style('home-style', get_template_directory_uri() . '/assets/css/home/home.css' );
@@ -62,10 +70,28 @@ function add_anime ()
 	wp_enqueue_script( 'anime-script');
 };
 
+function add_games ()
+{
+	wp_register_style('games-style', get_template_directory_uri() . '/assets/css/games/games.css' );
+	wp_register_script('games-script', get_template_directory_uri() . '/assets/js/games.js');
+	wp_enqueue_style( 'games-style' );
+	wp_enqueue_script( 'games-script');
+};
+
 function add_animeSingle ()
 {
-	wp_register_style('animeSingle-style', get_template_directory_uri() . '/assets/css/anime-single/single-anime.css' );
+	wp_register_style('animeSingle-style', get_template_directory_uri() . '/assets/css/single-anime/single-anime.css' );
+	wp_register_script('animeSingle-script', get_template_directory_uri() . '/assets/js/single-anime.js');
 	wp_enqueue_style( 'animeSingle-style' );
+	wp_enqueue_script( 'animeSingle-script');
+};
+
+function add_gamesSingle ()
+{
+	wp_register_style('gamesSingle-style', get_template_directory_uri() . '/assets/css/single-games/single-games.css' );
+	wp_register_script('gamesSingle-script', get_template_directory_uri() . '/assets/js/single-anime.js');
+	wp_enqueue_style( 'gamesSingle-style' );
+	wp_enqueue_script( 'gamesSingle-script');
 };
 
 add_action('init', function(){
@@ -110,7 +136,88 @@ add_action('init', function(){
 });
 
 add_action('init', function(){
-	register_taxonomy( 'genres', array( 'anime'), array(
+	register_taxonomy( 'genres-anime', array( 'anime'), array(
+		'label'                 => '', // определяется параметром $labels->name
+		'labels'                => [
+			'name'              => 'Жанры',
+			'singular_name'     => 'Жанр',
+			'search_items'      => 'Найти жанр',
+			'all_items'         => 'Все жанры',
+			'view_item '        => 'Показать жанр',
+			'parent_item'       => 'Родительский жанр',
+			'parent_item_colon' => 'Родительский жанр:',
+			'edit_item'         => 'Редактировать жанр',
+			'update_item'       => 'Обнрвить жанр',
+			'add_new_item'      => 'Добавить жанр',
+			'new_item_name'     => 'Новое название жанра',
+			'menu_name'         => 'Жанр',
+			'back_to_items'     => '← Вернуться жанрам',
+		],
+		'description'           => 'Жанры аниме', // описание таксономии
+		'public'                => true,
+		'publicly_queryable'    => true, // равен аргументу public
+		// 'show_in_nav_menus'     => true, // равен аргументу public
+		// 'show_ui'               => true, // равен аргументу public
+		// 'show_in_menu'          => true, // равен аргументу show_ui
+		// 'show_tagcloud'         => true, // равен аргументу show_ui
+		// 'show_in_quick_edit'    => true, // равен аргументу show_ui
+		'hierarchical'          => false,
+
+		'rewrite'               => true,
+		//'query_var'             => $taxonomy, // название параметра запроса
+		// 'capabilities'          => array(),
+		// 'meta_box_cb'           => null, // html метабокса. callback: `post_categories_meta_box` или `post_tags_meta_box`. false — метабокс отключен.
+		// 'show_admin_column'     => false, // авто-создание колонки таксы в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_rest'          => true, // добавить в REST API
+		// 'rest_base'             => true, // $taxonomy
+		// '_builtin'              => false,
+		//'update_count_callback' => '_update_post_term_count',
+	 ) );
+});
+
+add_action('init', function(){
+	register_post_type( 'games', [
+		'label'  => null,
+		'labels' => [
+			'name'               => 'Игры', // основное название для типа записи
+			'singular_name'      => 'Игра', // название для одной записи этого типа
+			'add_new'            => 'Добавить игру', // для добавления новой записи
+			'add_new_item'       => 'Добавление игру', // заголовка у вновь создаваемой записи в админ-панели.
+			'edit_item'          => 'Редактирование игры', // для редактирования типа записи
+			'new_item'           => 'Новое игра', // текст новой записи
+			'view_item'          => 'Смотреть игру', // для просмотра записи этого типа.
+			'search_items'       => 'Искать игру', // для поиска по этим типам записи
+			'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+			'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+			'parent_item_colon'  => '', // для родителей (у древовидных типов)
+			'menu_name'          => 'Игры', // название меню
+		],
+		'description'            => 'Игры которые я посмотрел',
+		'public'                 => true,
+		'publicly_queryable'  => true, // зависит от public
+		'exclude_from_search' => false, // зависит от public
+		'show_ui'             => true, // зависит от public
+		'show_in_nav_menus'   => true, // зависит от public
+		'show_in_menu'           => true, // показывать ли в меню админки
+		'show_in_admin_bar'   => true, // зависит от show_in_menu
+		'show_in_rest'        => true, // добавить в REST API. C WP 4.7
+		'rest_base'           => null, // $post_type. C WP 4.7
+		'menu_position'       => 4,
+		'menu_icon'           => null,
+		//'capability_type'   => 'post',
+		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
+		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+		'hierarchical'        => false,
+		'supports'            => [ 'title', 'editor','author', 'thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'taxonomies'          => ['genres'],
+		'has_archive'         => false,
+		'rewrite'             => true,
+		'query_var'           => true,
+	] );
+});
+
+add_action('init', function(){
+	register_taxonomy( 'genres-games', array( 'games'), array(
 		'label'                 => '', // определяется параметром $labels->name
 		'labels'                => [
 			'name'              => 'Жанры',
