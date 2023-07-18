@@ -4,6 +4,9 @@ add_action( 'wp_enqueue_scripts', 'add_reseting');
 add_action( 'wp_enqueue_scripts', 'add_blocks');
 add_action( 'wp_enqueue_scripts', 'add_header');
 add_action( 'wp_enqueue_scripts', 'page_type_validation');
+
+add_action( 'wp_enqueue_scripts', "setSearchData" );
+
 add_action( 'after_setup_theme', 'register_menu' );
 
 function add_variables ()
@@ -17,6 +20,53 @@ function add_reseting ()
 	wp_register_style('reseting-style', get_template_directory_uri() . '/assets/css/reseting/reseting.css' );
 	wp_enqueue_style( 'reseting-style' );
 };
+
+function setSearchData(){
+	wp_register_script('cookie-script', get_template_directory_uri() . '/assets/js/cookie.js');
+	wp_enqueue_script( 'cookie-script');
+
+	$arr = new WP_Query([
+		'post_type' => ['anime','games'],
+	]);
+	$arr = $arr -> posts; 
+	// echo count($arr);
+	$arrSend = [
+		"anime" => [],
+		"games" => [],
+	];
+	foreach ($arr as $arrItem) {
+		$postId = $arrItem->ID;
+		if (get_post_type($postId) == "anime") {
+			$post['post_link'] = get_permalink($postId);
+			$post['post_title'] = $arrItem-> post_title;
+			$post['post_image']=wp_get_attachment_image_src( get_post_meta( $postId, "image", true ), [300,300])[0];
+			$post['post_type'] = get_field_object( "type", $postId)["value"]["label"];
+			$post['post_part'] = get_post_meta( $postId, "part", true );
+			$post['post_dateCreate'] = "";
+			$post['post_dateCreate'] .= substr(get_post_meta( $postId, "date-create", true ),6, 2).".";
+			$post['post_dateCreate'] .= substr(get_post_meta( $postId, "date-create", true ),4, 2).".";
+			$post['post_dateCreate'] .= substr(get_post_meta( $postId, "date-create", true ),0, 4);
+			$post['post_category'] = get_post_type($postId);
+			array_push($arrSend["anime"],$post);
+		}
+		if (get_post_type($postId) == "games") {
+			$post['post_link'] = get_permalink($postId);
+			$post['post_title'] = $arrItem-> post_title;
+			$post['post_image']=wp_get_attachment_image_src( get_post_meta( $postId, "image", true ), [300,300])[0];
+			$post['post_type'] = get_field_object( "type", $postId)["value"]["label"];
+			$post['post_part'] = get_post_meta( $postId, "part", true );
+			$post['post_dateCreate'] = "";
+			$post['post_dateCreate'] .= substr(get_post_meta( $postId, "date-create", true ),6, 2).".";
+			$post['post_dateCreate'] .= substr(get_post_meta( $postId, "date-create", true ),4, 2).".";
+			$post['post_dateCreate'] .= substr(get_post_meta( $postId, "date-create", true ),0, 4);
+			$post['post_category'] = get_post_type($postId);
+			array_push($arrSend["games"],$post);
+		}
+	}
+
+	wp_localize_script( 'cookie-script', 'searchData', $arrSend );
+}
+
 
 function add_blocks ()
 {
@@ -43,8 +93,11 @@ function page_type_validation() {
 		add_games();
 		return;
 	}
+	if (get_page_uri() == "search") {
+		add_search();
+		return;
+	}
 	if (is_single()) {
-		echo get_post_type();
 		if (get_post_type() == "games") {
 			add_gamesSingle();
 			return;
@@ -76,6 +129,14 @@ function add_games ()
 	wp_register_script('games-script', get_template_directory_uri() . '/assets/js/games.js');
 	wp_enqueue_style( 'games-style' );
 	wp_enqueue_script( 'games-script');
+};
+
+function add_search ()
+{
+	wp_register_style('search-style', get_template_directory_uri() . '/assets/css/search/search.css' );
+	wp_register_script('search-script', get_template_directory_uri() . '/assets/js/search.js');
+	wp_enqueue_style( 'search-style' );
+	wp_enqueue_script( 'search-script');
 };
 
 function add_animeSingle ()

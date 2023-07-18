@@ -20,7 +20,7 @@ Template Name: games List
 						] );
 						if (isset($_REQUEST['filter'])) {
 							$genres = [];
-							$status =[];
+							$meta =[];
 							if(isset($_REQUEST['filter']['genres'])){
 								$genres = array(
 								array(
@@ -30,15 +30,12 @@ Template Name: games List
 								)
 							);
 							}
-							if(isset($_REQUEST['filter']['watched'])){
+							if(isset($_REQUEST['filter']['status'])){
 								$status = array(
-									array(
-											'key' => 'status',
-											'value' => true,
-											'compare' => '=',
-											'type' => 'bool',
-									)
+									'key' => 'status',
+									'value' => $_REQUEST['filter']['status'],
 								);
+								array_push($meta, $status);
 							}
 							
 							$query = new WP_Query( [
@@ -47,7 +44,7 @@ Template Name: games List
 								'paged' => get_query_var( 'paged' ),
 								'type' => 'list',
 								'tax_query' => $genres,
-								'meta_query' => $status,
+								'meta_query' => $meta,
 							] );
 						}
 						if ($query->have_posts()) {
@@ -58,12 +55,12 @@ Template Name: games List
 									<div class="games__item">
 										<div class="preview <?php if(get_field('rating') == 3) {echo 'preview--great';}?>">
 											<a href="<?php the_permalink( )?>" class="games__link"></a>
-											<img class="games__background <?php if(!get_field('status')) {echo 'background--no';}?>" src="<?php the_field('image'); ?>" alt="">
+											<img class="games__background <?php if(get_field('status')["value"] == "not-finished") {echo 'background--no';}?>" src="<?php the_field('image'); ?>" alt="">
 											<div class="games__info">
 												<a href="<?php the_permalink( )?>" class="games__title title">
 													<?php the_title(); ?>
 												</a>
-												<div class="rating <?php if (!get_field('status')) {	echo "rating--hide";
+												<div class="rating <?php if (!get_field('rating')) {	echo "rating--hide";
 												}?>">
 													<div class="rating__numbers">
 														<p class="awwda">
@@ -75,7 +72,7 @@ Template Name: games List
 															for ($i=0; $i < get_field('rating'); $i++) { 
 																?>
 																<div class="rating__star">
-																	<img src="<?php bloginfo('template_url');?>/assets/images/games/star.png">
+																	<img src="<?php bloginfo('template_url');?>/assets/images/anime/star.png">
 																</div>
 																<?php
 															};
@@ -110,13 +107,10 @@ Template Name: games List
 											</p>
 											<p class="details__item">
 												<span class="details__title">Статус:</span> 
-												<?php 
-													if (get_field('status')) {
-														echo 'Пройдено';
-													}
-													else {
-														echo 'Не пройдено';
-													}
+
+												<?php
+													$temp = get_field_object('status');
+													echo $temp["value"]["label"];
 												?>
 											</p>
 										</div>
@@ -177,17 +171,41 @@ Template Name: games List
 								</div>
 							</div>
 							<div class="filter__body filter__body-games">
+								<?php
+									// Проверка на соответствие чекбоксов
+									function formMetaValidation($neededStr, $currentArr) {
+										if(isset($_REQUEST['filter'][$currentArr])){
+											if(gettype(array_search($neededStr, $_REQUEST['filter'][$currentArr]))=="integer")
+											return "checked";
+										}
+									}
+								?>
 								<div class="filter__header">
 									<label for="filter__show2" class="filter__trigger"></label>
 									<h4 class="filter__type">
-										Прочее
+										Статус
 									</h4>
 								</div>
 								<input class="filter__show" type="checkbox" id="filter__show2">
 								<div class="filter__labels">
 									<label class="label">
-											<span class="label__text">Просмотрено: </span>
-											<input class="label__input" <?php if(isset($_REQUEST['filter']['watched'])){echo "checked";}?> name="filter[watched][]" type="checkbox" value="<?php echo true?>" id="">
+											<span class="label__text">Прошёл: </span>
+											<input class="label__input" <?php echo formMetaValidation("finished","status");?> name="filter[status][]" type="checkbox" value="<?php echo "finished"?>" id="">
+											<div class="label__front"></div>
+									</label>
+									<label class="label">
+											<span class="label__text">Не прошёл: </span>
+											<input class="label__input" <?php echo formMetaValidation("not-finished","status");?> name="filter[status][]" type="checkbox" value="<?php echo "not-finished"?>" id="">
+											<div class="label__front"></div>
+									</label>
+									<label class="label">
+											<span class="label__text">Прошёл на YouTube: </span>
+											<input class="label__input" <?php echo formMetaValidation("finished-by-yt","status");?> name="filter[status][]" type="checkbox" value="<?php echo "finished-by-yt"?>" id="">
+											<div class="label__front"></div>
+									</label>
+									<label class="label">
+											<span class="label__text">Нельзя пройти: </span>
+											<input class="label__input" <?php echo formMetaValidation("imposible-tofinish","status");?> name="filter[status][]" type="checkbox" value="<?php echo "imposible-tofinish"?>" id="">
 											<div class="label__front"></div>
 									</label>
 								</div>

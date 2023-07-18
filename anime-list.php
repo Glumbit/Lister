@@ -215,6 +215,15 @@ Template Name: Anime List
 								</div>
 							</div>
 							<div class="filter__body filter__body-anime">
+								<?php
+									// Проверка на соответствие чекбоксов
+									function formMetaValidation($neededStr, $currentArr) {
+										if(isset($_REQUEST['filter'][$currentArr])){
+											if(gettype(array_search($neededStr, $_REQUEST['filter'][$currentArr]))=="integer")
+											return "checked";
+										}
+									}
+								?>
 								<div class="filter__header">
 									<label for="filter__show3" class="filter__trigger"></label>
 									<h4 class="filter__type">
@@ -225,31 +234,12 @@ Template Name: Anime List
 								<div class="filter__labels">
 									<label class="label">
 										<span class="label__text">Сериал: </span>
-										<input class="label__input" 
-											<?php 
-												if (isset($_REQUEST['filter'])) {
-													foreach ($_REQUEST['filter']['type'] as $type) {
-														if($type == "serial"){
-															echo "checked";
-														}
-													}
-												}
-											?> 
-											name="filter[type][]" type="checkbox" value="<?php echo "serial"?>" id="">
+										<input class="label__input" <?php echo formMetaValidation('serial', 'type');?> name="filter[type][]" type="checkbox" value="<?php echo "serial"?>" id="">
 										<div class="label__front"></div>
 									</label>
 									<label class="label">
 										<span class="label__text">Фильм: </span>
-										<input class="label__input" <?php 
-												if (isset($_REQUEST['filter'])) {
-													foreach ($_REQUEST['filter']['type'] as $type) {
-														if($type == "film"){
-															echo "checked";
-														}
-													}
-												}
-											?>
-											name="filter[type][]" type="checkbox" value="<?php echo "film"?>" id="">
+										<input class="label__input" <?php echo formMetaValidation('film', 'type');?> name="filter[type][]" type="checkbox" value="<?php echo "film"?>" id="">
 										<div class="label__front"></div>
 									</label>
 								</div>

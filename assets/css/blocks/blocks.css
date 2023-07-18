@@ -57,7 +57,7 @@
 }
 
 .title_line-bottom {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 400;
   margin: 0;
   margin-bottom: 20px;
@@ -91,9 +91,14 @@
   background: var(--colorOrange);
 }
 
+.trigger {
+  display: none;
+}
+
 @media (max-width: 1440px) {
   .container {
     margin: 0 30px;
+    width: auto;
   }
 }
 @media (max-width: 768px) {
