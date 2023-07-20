@@ -16,7 +16,7 @@
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: minmax(200px, 20%) 1fr;
   grid-template-areas: "img info" "rating rating";
   gap: 50px;
   align-items: flex-start;
@@ -224,7 +224,10 @@
 
 .similar__items {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 25%));
+  grid-template-columns: repeat(auto-fill, 320px);
+  align-items: flex-start;
+  justify-content: space-evenly;
+  gap: 20px;
 }
 
 .similar__item {
@@ -234,11 +237,12 @@
 }
 
 .similar__img {
+  --borderRadius: 5px 0px 0px 5px;
   position: relative;
   aspect-ratio: 3/4;
   min-width: 100px;
   max-width: 30%;
-  border-radius: 5px 0px 0px 5px;
+  border-radius: var(--borderRadius);
   border-right: 3px solid var(--colorOrange);
 }
 .similar__img img {
@@ -248,7 +252,7 @@
   bottom: 0;
   right: 0;
   height: 100%;
-  border-radius: inherit;
+  border-radius: var(--borderRadius);
 }
 
 .similar__list {
@@ -256,13 +260,16 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 5px;
 }
 
 .similar__list-title {
   font-size: 1.25rem;
   font-weight: 600;
+  max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .similar__list-item_disabled {
@@ -270,13 +277,14 @@
 }
 
 .shots__items {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  justify-content: space-evenly;
   gap: 20px;
 }
 
 .single-anime__shots-item {
-  min-width: 200px;
-  max-width: 25%;
+  position: relative;
   aspect-ratio: 16/9;
   border-radius: 10px;
   background: var(--colorViolet);
@@ -285,9 +293,47 @@
   border-radius: inherit;
   -o-object-fit: contain;
      object-fit: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   height: 100%;
+  border-radius: 10px;
 }
 
 .single-anime__block_trailer {
   margin-bottom: 0;
+}
+
+@media (max-width: 992px) {
+  .single-anime__container {
+    padding: 20px2;
+  }
+  .single-anime__info {
+    grid-template-areas: "img img" "info info" "rating rating";
+  }
+  .single-anime__col:nth-child(1) {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 300px;
+  }
+  .list__data_description {
+    width: 100%;
+  }
+  .anime-single__rating {
+    width: 100%;
+  }
+}
+@media (max-width: 490px) {
+  .similar__items {
+    grid-template-columns: repeat(auto-fill, 235px);
+  }
+  .similar__img {
+    display: none;
+  }
+  .shots__items {
+    grid-template-columns: repeat(auto-fill, 235px);
+  }
 }/*# sourceMappingURL=single-anime.css.map */

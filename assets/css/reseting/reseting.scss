@@ -6,7 +6,6 @@
 
 html,
 body {
-	height: 100%;
 	font-family: var(--fontText);
 	background-color: var(--colorVioletDark);
 	color: var(--colorWhite);
@@ -45,6 +44,7 @@ section {
 
 input {
 	border: 0;
+	min-width: 0;
 
 	&:focus {
 		border: 0;

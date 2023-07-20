@@ -19,6 +19,10 @@
   position: relative;
   display: flex;
   gap: 10px;
+  padding: 5px;
+}
+.logo:hover {
+  background: var(--colorVioletDark);
 }
 
 .logo__img {
@@ -33,6 +37,7 @@
 }
 
 .search {
+  min-width: 0;
   display: flex;
   align-items: center;
   margin-left: auto;
@@ -219,6 +224,10 @@
   bottom: 10px;
 }
 
+.spacer {
+  height: 91px;
+}
+
 @media (max-width: 992px) {
   .nav {
     position: fixed;
@@ -255,5 +264,10 @@
   }
   .burger {
     display: flex;
+  }
+}
+@media (max-width: 500px) {
+  .logo__brand {
+    display: none;
   }
 }/*# sourceMappingURL=header.css.map */

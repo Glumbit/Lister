@@ -12,10 +12,10 @@
 	<header class="header">
 		<div class="container">
 			<nav class="navbar">
-				<div class="logo">
+				<a href="<?php echo home_url( )?>" class="logo">
 					<img class="logo__img" src="<?php bloginfo('template_url')?> /assets/images/index/logo_img.png" alt="logo img">
-					<a class="logo__brand" href="<?php echo home_url( )?>">Lister</a>
-				</div>
+					<p class="logo__brand">Lister</p>
+				</a>
 				<div class="search">
 					<form action="/search" method="post" class="search__form" id="collapseExample">
 						<input class="search__field" type="search" name="myVar" placeholder="Искать" aria-label="Search">

@@ -163,6 +163,7 @@ Template Name: Anime List
 						?>
 					</div>
 				</div>
+				<input type="checkbox" id="filter_show" class="trigger filter_trigger">
 				<div class="filter filter-anime" id="anime__filter">
 					<div class="filter__inner-anime">
 						<h2 class="title-filter">Фильтры</h2>
@@ -174,7 +175,7 @@ Template Name: Anime List
 										Жанры
 									</h4>
 								</div>
-								<input class="filter__show" type="checkbox" id="filter__show1">
+								<input class="trigger trigger-category" type="checkbox" id="filter__show1">
 								<div class="filter__labels">
 									<?php 
 									$terms = get_terms( ['taxonomy' => 'genres-anime',] );
@@ -205,7 +206,7 @@ Template Name: Anime List
 										Прочее
 									</h4>
 								</div>
-								<input class="filter__show" type="checkbox" id="filter__show2">
+								<input class="trigger trigger-category" type="checkbox" id="filter__show2">
 								<div class="filter__labels">
 									<label class="label">
 											<span class="label__text">Просмотрено: </span>
@@ -230,7 +231,7 @@ Template Name: Anime List
 										Тип
 									</h4>
 								</div>
-								<input class="filter__show" type="checkbox" id="filter__show3">
+								<input class="trigger trigger-category" type="checkbox" id="filter__show3">
 								<div class="filter__labels">
 									<label class="label">
 										<span class="label__text">Сериал: </span>
@@ -249,7 +250,10 @@ Template Name: Anime List
 						</form>
 					</div>
 				</div>
-				<button class="filter__btn">Фильтры</button>
+				<div class="filter_mobile">
+					<label for="filter_show"></label>
+					<button class="filter__btn">Фильтры</button>
+				</div>
 			</div>
 			<!-- <div class="pagination">
 				<?php 

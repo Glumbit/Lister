@@ -146,7 +146,7 @@ Template Name: games List
 										Жанры
 									</h4>
 								</div>
-								<input class="filter__show" type="checkbox" id="filter__show1">
+								<input class="trigger trigger-category" type="checkbox" id="filter__show1">
 								<div class="filter__labels">
 									<?php 
 									$terms = get_terms( ['taxonomy' => 'genres-games',] );
@@ -186,7 +186,7 @@ Template Name: games List
 										Статус
 									</h4>
 								</div>
-								<input class="filter__show" type="checkbox" id="filter__show2">
+								<input class="trigger trigger-category" type="checkbox" id="filter__show2">
 								<div class="filter__labels">
 									<label class="label">
 											<span class="label__text">Прошёл: </span>

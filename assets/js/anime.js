@@ -17,18 +17,3 @@ function animeDetailsOverflow() {
 		}
 	}
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-	// console.log(document.querySelector('.filter__btn'));
-	if (window.innerWidth < 992) {
-		const filter = document.querySelector('.filter__btn');
-		filter.addEventListener("click", filterShow);
-	}
-});
-
-
-console.log(window.innerWidth);
-function filterShow() {
-	console.log("doawijd");
-	document.querySelector('.filter').classList.add('filter--show');
-}

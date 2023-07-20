@@ -5,8 +5,6 @@ add_action( 'wp_enqueue_scripts', 'add_blocks');
 add_action( 'wp_enqueue_scripts', 'add_header');
 add_action( 'wp_enqueue_scripts', 'page_type_validation');
 
-add_action( 'wp_enqueue_scripts', "setSearchData" );
-
 add_action( 'after_setup_theme', 'register_menu' );
 
 function add_variables ()
@@ -21,15 +19,23 @@ function add_reseting ()
 	wp_enqueue_style( 'reseting-style' );
 };
 
-function setSearchData(){
-	wp_register_script('cookie-script', get_template_directory_uri() . '/assets/js/cookie.js');
-	wp_enqueue_script( 'cookie-script');
+function add_blocks ()
+{
+	wp_register_style('blocks-style', get_template_directory_uri() . '/assets/css/blocks/blocks.css' );
+	wp_enqueue_style( 'blocks-style' );
+};
+
+function add_header ()
+{
+	wp_register_style('header-style', get_template_directory_uri() . '/assets/css/header/header.css' );
+	wp_register_script('header-script', get_template_directory_uri() . '/assets/js/header.js');
+	wp_enqueue_style( 'header-style' );
+	wp_enqueue_script( 'header-script');
 
 	$arr = new WP_Query([
 		'post_type' => ['anime','games'],
 	]);
 	$arr = $arr -> posts; 
-	// echo count($arr);
 	$arrSend = [
 		"anime" => [],
 		"games" => [],
@@ -64,20 +70,7 @@ function setSearchData(){
 		}
 	}
 
-	wp_localize_script( 'cookie-script', 'searchData', $arrSend );
-}
-
-
-function add_blocks ()
-{
-	wp_register_style('blocks-style', get_template_directory_uri() . '/assets/css/blocks/blocks.css' );
-	wp_enqueue_style( 'blocks-style' );
-};
-
-function add_header ()
-{
-	wp_register_style('header-style', get_template_directory_uri() . '/assets/css/header/header.css' );
-	wp_enqueue_style( 'header-style' );
+	wp_localize_script( 'header-script', 'searchData', $arrSend );
 };
 
 function page_type_validation() {

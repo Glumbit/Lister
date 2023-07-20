@@ -165,7 +165,6 @@ get_header();
 						?>
 					</div>
 				</div>
-				<button class="filter__btn">Фильтры</button>
 			</div>
 			<!-- <div class="pagination">
 				<?php 
