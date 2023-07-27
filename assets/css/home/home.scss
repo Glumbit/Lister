@@ -54,9 +54,49 @@
 
 .statistics__cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(150px, 200px));
-	justify-content: space-evenly;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 400px));
+	justify-content: center;
 	gap: 20px;
+	align-items: flex-start;
+}
+
+.statistics__cards__item {
+	position: relative;
+	border-radius: 5px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	border: solid var(--colorOrange);
+	overflow: hidden;
+
+	&:hover {
+		&:before {
+			transform: translate(10%, -60%) rotate(45deg);
+		}
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		width: 500px;
+		aspect-ratio: 1;
+		background-color: var(--colorOrange);
+		opacity: 0.5;
+		right: 0;
+		transform: translate(110%, -60%) rotate(45deg);
+		transition: transform 400ms;
+	}
+}
+
+.statistics__card-title {
+	position: relative;
+	font-weight: 500;
+	font-size: 1.5rem;
+}
+
+.statistics__card-text {
+	position: relative;
 }
 
 .cards__item-rotate-right {

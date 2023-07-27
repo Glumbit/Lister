@@ -205,7 +205,7 @@ Template Name: games List
 									</label>
 									<label class="label">
 											<span class="label__text">Нельзя пройти: </span>
-											<input class="label__input" <?php echo formMetaValidation("imposible-tofinish","status");?> name="filter[status][]" type="checkbox" value="<?php echo "imposible-tofinish"?>" id="">
+											<input class="label__input" <?php echo formMetaValidation("imposible-to-finish","status");?> name="filter[status][]" type="checkbox" value="<?php echo "imposible-to-finish"?>" id="">
 											<div class="label__front"></div>
 									</label>
 								</div>
