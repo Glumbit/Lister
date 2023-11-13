@@ -10,9 +10,9 @@
 
 .games__items {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, 180px);
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 	justify-content: center;
-	gap: 30px;
+	gap: 10px;
 	background: var(--colorViolet);
 	padding: 30px;
 	border-radius: 10px;
@@ -130,13 +130,45 @@
 
 .rating__visual {
 	flex-grow: 1;
-	display: grid;
-	grid-template-columns: repeat(3, 30px);
-	gap: 17px;
-}
+	width: 100%;
+	background-color: var(--colorVioletDark);
+	outline: 2px solid var(--colorOrange);
+	height: 10px;
+	border-radius: 5px;
 
-.rating__star {
-	pointer-events: none;
+	&:before {
+		content: '';
+		position: absolute;
+		background-color: var(--colorOrange);
+		top: 0;
+		bottom: 0;
+		left: -1px;
+		border-radius: 5px;
+	}
+
+	&_1 {
+		position: relative;
+
+		&:before {
+			width: 33.3%;
+		}
+	}
+
+	&_2 {
+		position: relative;
+
+		&:before {
+			width: 66.6%;
+		}
+	}
+
+	&_3 {
+		position: relative;
+
+		&:before {
+			width: calc(100% + 2px);
+		}
+	}
 }
 
 .details {
@@ -312,6 +344,9 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding: 10px;
+	background-color: var(--colorViolet);
+	border-radius: 5px;
 }
 
 .label__input {
@@ -362,7 +397,6 @@
 		top: 0;
 		bottom: 0px;
 		width: 100%;
-		background: var(--colorViolet);
 		transform: translateX(-80%);
 		transition: transform 500ms;
 	}
@@ -381,7 +415,7 @@
 	font-weight: 500;
 }
 
-.filter_mobile {
+.filter__mobile {
 	display: none;
 	position: fixed;
 	z-index: 4;
@@ -389,7 +423,7 @@
 	left: 0;
 	right: 0;
 	width: 100vw;
-	padding: 20px 30px 20px;
+	padding: 10px;
 	background: var(--colorViolet);
 	border-top: 2px solid var(--colorOrange);
 
@@ -405,7 +439,7 @@
 
 .filter__btn {
 	display: block;
-	background: var(--colorOrange);
+	background: var(--colorVioletDark);
 	padding: 10px 0;
 	border-radius: 5px;
 	display: none;
@@ -437,8 +471,13 @@
 		border-radius: 0px;
 	}
 
-	.filter_mobile {
+	.filter__mobile {
 		display: block;
+		transition: translate 200ms;
+	}
+
+	.filter__mobile_hidden {
+		translate: 0px 100%;
 	}
 
 	.filter_trigger {
@@ -449,11 +488,8 @@
 
 	.btn-games {
 		display: block;
-		width: auto;
-		position: absolute;
-		bottom: 20px;
-		left: 50%;
-		transform: translateX(-50%);
+		width: fit-content;
+		margin: 0 auto;
 	}
 
 	.filter__btn {
@@ -464,5 +500,26 @@
 @media (max-width: 780px) {
 	.details {
 		display: none;
+	}
+}
+
+@media (max-width: 490px) {
+
+	section {
+		padding: 10px 0px;
+	}
+
+	.games__inner {
+		margin: 0px 10px;
+	}
+
+	.games__items {
+		grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+		gap: 10px;
+		padding: 10px;
+	}
+
+	.info__name {
+		font-size: 1rem;
 	}
 }

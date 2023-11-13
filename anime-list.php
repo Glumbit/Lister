@@ -21,12 +21,12 @@ Template Name: Anime List
 						if (isset($_REQUEST['filter'])) {
 							$genres = [];
 							$meta =[];
-							if(isset($_REQUEST['filter']['genres'])){
+							if(isset($_REQUEST['filter']['genres-anime'])){
 								$genres = array(
 								array(
-								"taxonomy" => "genres",
+								"taxonomy" => "genres-anime",
 								"field" => "id",
-								"terms" => $_REQUEST['filter']['genres'],
+								"terms" => $_REQUEST['filter']['genres-anime'],
 								)
 							);
 							}
@@ -79,20 +79,14 @@ Template Name: Anime List
 												<div class="rating <?php if (!get_field('status')) {	echo "rating--hide";
 												}?>">
 													<div class="rating__numbers">
-														<p class="awwda">
-															<?php the_field('rating');?>/3
+														<p>
+															<?php the_field('rating');?>
 														</p>
 													</div>
-													<div class="rating__visual">
-														<?php 
-															for ($i=0; $i < get_field('rating'); $i++) { 
-																?>
-																<div class="rating__star">
-																	<img src="<?php bloginfo('template_url');?>/assets/images/anime/star.png">
-																</div>
-																<?php
-															};
-														?>
+													<div class="rating__visual rating__visual_<?php echo get_field('rating'); ?>">
+													</div>
+													<div class="rating__numbers">
+														<p>3</p>
 													</div>
 												</div>
 											</div>
@@ -167,7 +161,7 @@ Template Name: Anime List
 				<div class="filter filter-anime" id="anime__filter">
 					<div class="filter__inner-anime">
 						<h2 class="title-filter">Фильтры</h2>
-						<form method="get" action="/anime-list">
+						<form method="get" action="<?php echo get_site_url()?>/anime-list">
 							<div class="filter__body filter__body-anime">
 								<div class="filter__header">
 									<label for="filter__show1" class="filter__trigger"></label>
@@ -184,15 +178,15 @@ Template Name: Anime List
 										<label class="label">
 											<span class="label__text"><?php echo $term->name?>: </span>
 											<input class="label__input" <?php
-												if (isset($_REQUEST['filter']['genres'])) {
-													for ($i=0; $i < count($_REQUEST['filter']['genres']); $i++) {
-														$genreID = $_REQUEST['filter']['genres'][$i];
+												if (isset($_REQUEST['filter']['genres-anime'])) {
+													for ($i=0; $i < count($_REQUEST['filter']['genres-anime']); $i++) {
+														$genreID = $_REQUEST['filter']['genres-anime'][$i];
 														if ($genreID == $term->term_id) {
 															echo "checked";
 														}
 													}
 												}
-											?> name="filter[genres][]" type="checkbox" value="<?php echo $term->term_id ?>" id="">
+											?> name="filter[genres-anime][]" type="checkbox" value="<?php echo $term->term_id ?>" id="">
 											<div class="label__front"></div>
 										</label>
 										<?php
@@ -250,7 +244,7 @@ Template Name: Anime List
 						</form>
 					</div>
 				</div>
-				<div class="filter_mobile">
+				<div class="filter__mobile">
 					<label for="filter_show"></label>
 					<button class="filter__btn">Фильтры</button>
 				</div>

@@ -36,6 +36,10 @@
   padding: 10px 30px;
 }
 
+.text_dark {
+  opacity: 0.7;
+}
+
 .title_line-left {
   font-size: 2rem;
   position: relative;
@@ -100,5 +104,10 @@
 @media (max-width: 768px) {
   .search {
     width: 100%;
+  }
+}
+@media (max-width: 500px) {
+  .title_line-bottom {
+    padding-left: 0px;
   }
 }/*# sourceMappingURL=blocks.css.map */

@@ -13,11 +13,11 @@
 		<div class="container">
 			<nav class="navbar">
 				<a href="<?php echo home_url( )?>" class="logo">
-					<img class="logo__img" src="<?php bloginfo('template_url')?> /assets/images/index/logo_img.png" alt="logo img">
+					<img class="logo__img" src="<?php bloginfo('template_url')?>/assets/images/index/logo_img.png" alt="logo img">
 					<p class="logo__brand">Lister</p>
 				</a>
 				<div class="search">
-					<form action="/search" method="post" class="search__form" id="collapseExample">
+					<form action="<?php echo get_site_url()?>/search/" method="post" class="search__form" id="collapseExample">
 						<input class="search__field" type="search" name="myVar" placeholder="Искать" aria-label="Search">
 						<?php
 							$searchAnime = new WP_Query([
@@ -36,22 +36,6 @@
 							<div class="search__img"><a href="#"><img src="<?php echo wp_get_attachment_image_src( get_post_meta( $posid/*здесь ID*/, "image", true ), [300,300])[0];?>" alt=""></a></div>
 							<div class="search__data">
 								<a href="<?php the_permalink($posid/*здесь ID*/)?>" class="search__title_line-left title_line-left"><?php echo get_the_title($posid ) ?></a>
-								<p><?php echo get_field_object( "type", $posid)["value"]["label"]; ?></p>
-								<p><?php echo get_post_meta( $posid, "part", true );?></p>
-								<p>Вышел: 
-									<?php
-										echo substr(get_post_meta( $posid, "date-create", true ),6, 2).".";
-										echo substr(get_post_meta( $posid, "date-create", true ),4, 2).".";
-										echo substr(get_post_meta( $posid, "date-create", true ),0, 4);
-									?>
-								</p>
-							</div>
-						</div>
-						<div class="search__item">
-							<?php $posid = 71 ?>
-							<div class="search__img"><img src="<?php echo wp_get_attachment_image_src( get_post_meta( $posid/*здесь ID*/, "image", true ), [300,300])[0];?>" alt=""></div>
-							<div class="search__data">
-								<a href="<?php the_permalink($posid/*здесь ID*/)?>" class="search__title_line-left title_line-left" title="<?php echo get_the_title($posid ) ?>"><?php echo get_the_title($posid ) ?></a>
 								<p><?php echo get_field_object( "type", $posid)["value"]["label"]; ?></p>
 								<p><?php echo get_post_meta( $posid, "part", true );?></p>
 								<p>Вышел: 

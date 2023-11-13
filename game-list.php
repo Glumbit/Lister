@@ -21,12 +21,12 @@ Template Name: games List
 						if (isset($_REQUEST['filter'])) {
 							$genres = [];
 							$meta =[];
-							if(isset($_REQUEST['filter']['genres'])){
+							if(isset($_REQUEST['filter']['genres-games'])){
 								$genres = array(
 								array(
-								"taxonomy" => "genres",
+								"taxonomy" => "genres-games",
 								"field" => "id",
-								"terms" => $_REQUEST['filter']['genres'],
+								"terms" => $_REQUEST['filter']['genres-games'],
 								)
 							);
 							}
@@ -63,20 +63,14 @@ Template Name: games List
 												<div class="rating <?php if (!get_field('rating')) {	echo "rating--hide";
 												}?>">
 													<div class="rating__numbers">
-														<p class="awwda">
-															<?php the_field('rating');?>/3
+														<p>
+															<?php the_field('rating');?>
 														</p>
 													</div>
-													<div class="rating__visual">
-														<?php 
-															for ($i=0; $i < get_field('rating'); $i++) { 
-																?>
-																<div class="rating__star">
-																	<img src="<?php bloginfo('template_url');?>/assets/images/anime/star.png">
-																</div>
-																<?php
-															};
-														?>
+													<div class="rating__visual rating__visual_<?php echo get_field('rating'); ?>">
+													</div>
+													<div class="rating__numbers">
+														<p>3</p>
 													</div>
 												</div>
 											</div>
@@ -135,6 +129,7 @@ Template Name: games List
 						?>
 					</div>
 				</div>
+				<input type="checkbox" id="filter_show" class="trigger filter_trigger">
 				<div class="filter filter-games" id="games__filter">
 					<div class="filter__inner-games">
 						<h2 class="title-filter">Фильтры</h2>
@@ -155,15 +150,15 @@ Template Name: games List
 										<label class="label">
 											<span class="label__text"><?php echo $term->name?>: </span>
 											<input class="label__input" <?php
-												if (isset($_REQUEST['filter']['genres'])) {
-													for ($i=0; $i < count($_REQUEST['filter']['genres']); $i++) {
-														$genreID = $_REQUEST['filter']['genres'][$i];
+												if (isset($_REQUEST['filter']['genres-games'])) {
+													for ($i=0; $i < count($_REQUEST['filter']['genres-games']); $i++) {
+														$genreID = $_REQUEST['filter']['genres-games'][$i];
 														if ($genreID == $term->term_id) {
 															echo "checked";
 														}
 													}
 												}
-											?> name="filter[genres][]" type="checkbox" value="<?php echo $term->term_id ?>" id="">
+											?> name="filter[genres-games][]" type="checkbox" value="<?php echo $term->term_id ?>" id="">
 											<div class="label__front"></div>
 										</label>
 										<?php
@@ -214,7 +209,10 @@ Template Name: games List
 						</form>
 					</div>
 				</div>
-				<button class="filter__btn">Фильтры</button>
+				<div class="filter__mobile">
+					<label for="filter_show"></label>
+					<button class="filter__btn">Фильтры</button>
+				</div>
 			</div>
 			<!-- <div class="pagination">
 				<?php 

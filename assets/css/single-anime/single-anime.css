@@ -5,22 +5,16 @@
   padding: 30px;
 }
 
-.single-anime__block {
-  margin-bottom: 30px;
-  background: var(--colorVioletDark);
-  padding: 20px;
-  border-radius: 10px;
-}
-
 .single-anime__info {
   position: relative;
   z-index: 2;
   display: grid;
   grid-template-columns: minmax(200px, 20%) 1fr;
-  grid-template-areas: "img info" "rating rating";
-  gap: 50px;
+  grid-template-areas: "img info" "bottom bottom";
+  gap: 20px;
+  row-gap: 20px;
   align-items: flex-start;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 }
 
 .single-anime__col:nth-child(1) {
@@ -29,15 +23,20 @@
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 2;
-  margin-bottom: 50px;
   grid-area: img;
+  border-top: 3px solid var(--colorOrange);
+  border-bottom: 3px solid var(--colorOrange);
+  overflow: hidden;
 }
 .single-anime__col:nth-child(2) {
   grid-area: info;
 }
+.single-anime__col:nth-child(2) .single-anime__list {
+  padding-top: 0;
+}
 
 .single-anime__img {
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px;
   aspect-ratio: 3/4;
   position: relative;
 }
@@ -51,63 +50,43 @@
   height: 100%;
 }
 
-#info__meta:checked + .list_show {
-  max-height: 700px;
-  padding: 10px;
-  padding-top: 15px;
-}
-#info__meta:checked + .list_show:after {
-  height: 5px;
-}
-#info__meta:checked ~ .info__trigger:before {
-  content: "скрыть";
-}
-
-.list__outside {
-  position: absolute;
-  left: 0;
-  right: 0;
-  background: var(--colorVioletDark);
-  border-radius: 0 0 10px 10px;
-}
-
 .single-anime__list {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 10px;
+  padding: 20px;
 }
 
-.list_show {
-  max-height: 0px;
-  overflow-y: hidden;
-  padding: 0 10px;
-  transition: max-height 500ms, padding 500ms;
+.single-anime__title {
+  margin-bottom: 5px;
 }
-.list_show:after {
-  content: "";
-  width: 100%;
-  position: absolute;
-  height: 0px;
-  background: var(--colorOrange);
-  top: 0;
-  left: 0;
-  transition: height 300ms;
+
+.single-anime__original {
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
+.list__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(var(--colorVioletDarkRGB), 0.7);
 }
 
 .list-title {
-  font-size: 0.85rem;
-  opacity: 0.7;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--colorOrange);
 }
 
 .single-anime__list-title {
   margin-bottom: 10px;
 }
 
-.list__data_description {
-  width: 70%;
-  letter-spacing: 0.005rem;
-  line-height: 1.25rem;
+.list__data {
+  width: 60%;
+  min-width: 200px;
 }
 
 .info__trigger {
@@ -154,11 +133,14 @@
   padding: 7px 25px;
 }
 
-.anime-single__rating {
+.single-anime__col-12 {
+  grid-area: bottom;
+}
+
+.single-anime__rating {
   width: 75%;
   margin: 0 auto;
   position: relative;
-  grid-area: rating;
 }
 
 .progress-bar {
@@ -222,6 +204,13 @@
   margin-left: auto;
 }
 
+.single-anime__block {
+  margin-bottom: 30px;
+  background: var(--colorVioletDark);
+  padding: 20px;
+  border-radius: 10px;
+}
+
 .similar__items {
   display: grid;
   grid-template-columns: repeat(auto-fill, 320px);
@@ -272,13 +261,19 @@
   white-space: nowrap;
 }
 
+.similar__list-title_nothing {
+  font-size: 1.25rem;
+  display: block;
+  padding-left: 25px;
+}
+
 .similar__list-item_disabled {
   opacity: 0.7;
 }
 
 .shots__items {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 320px);
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   justify-content: space-evenly;
   gap: 20px;
 }
@@ -308,10 +303,11 @@
 
 @media (max-width: 992px) {
   .single-anime__container {
-    padding: 20px2;
+    padding: 30px 10px;
+    margin: 0px 10px;
   }
   .single-anime__info {
-    grid-template-areas: "img img" "info info" "rating rating";
+    grid-template-areas: "img img" "info info" "bottom bottom";
   }
   .single-anime__col:nth-child(1) {
     position: relative;
@@ -334,6 +330,6 @@
     display: none;
   }
   .shots__items {
-    grid-template-columns: repeat(auto-fill, 235px);
+    grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
   }
 }/*# sourceMappingURL=single-anime.css.map */

@@ -135,7 +135,7 @@ function add_search ()
 function add_animeSingle ()
 {
 	wp_register_style('animeSingle-style', get_template_directory_uri() . '/assets/css/single-anime/single-anime.css' );
-	wp_register_script('animeSingle-script', get_template_directory_uri() . '/assets/js/single-anime.js');
+	wp_register_script('animeSingle-script', get_template_directory_uri() . '/assets/js/single.js');
 	wp_enqueue_style( 'animeSingle-style' );
 	wp_enqueue_script( 'animeSingle-script');
 };
@@ -143,7 +143,7 @@ function add_animeSingle ()
 function add_gamesSingle ()
 {
 	wp_register_style('gamesSingle-style', get_template_directory_uri() . '/assets/css/single-games/single-games.css' );
-	wp_register_script('gamesSingle-script', get_template_directory_uri() . '/assets/js/single-anime.js');
+	wp_register_script('gamesSingle-script', get_template_directory_uri() . '/assets/js/single.js');
 	wp_enqueue_style( 'gamesSingle-style' );
 	wp_enqueue_script( 'gamesSingle-script');
 };
