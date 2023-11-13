@@ -61,10 +61,6 @@
   border-radius: inherit;
 }
 
-.preview--great {
-  box-shadow: 0px 0px 10px 1px var(--colorOrange);
-}
-
 .games__link {
   position: absolute;
   top: 0;
@@ -85,6 +81,8 @@
      -moz-user-select: none;
           user-select: none;
   height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .games__info {
@@ -100,11 +98,13 @@
   justify-content: space-between;
 }
 
-.info__name {
-  font-size: 1.25rem;
-  font-weight: 500;
-  max-height: 25px;
+.games__title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   overflow: hidden;
+  font-size: 1rem;
+  font-weight: 500;
   text-overflow: ellipsis;
 }
 
@@ -473,7 +473,7 @@
     gap: 10px;
     padding: 10px;
   }
-  .info__name {
-    font-size: 1rem;
+  .games__title {
+    font-size: 0.85rem;
   }
 }/*# sourceMappingURL=games.css.map */

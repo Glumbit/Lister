@@ -14,7 +14,7 @@ Template Name: Anime List
 						global $query;
 						$query = new WP_Query( [
 							'post_type' => 'anime',
-							'posts_per_page' => 30,
+							'posts_per_page' => 20,
 							'paged' => get_query_var( 'paged' ),
 							'type' => 'list',
 						] );
@@ -69,11 +69,11 @@ Template Name: Anime List
 								$query->the_post();
 								?>
 									<div class="anime__item">
-										<div class="preview <?php if(get_field('rating') == 3) {echo 'preview--great';}?>">
+										<div class="preview">
 											<a href="<?php the_permalink( )?>" class="anime__link"></a>
 											<img class="anime__background <?php if(!get_field('status')) {echo 'background--no';}?>" src="<?php the_field('image'); ?>" alt="">
 											<div class="anime__info">
-												<a href="<?php the_permalink( )?>" class="info__name" rows="1">
+												<a href="<?php the_permalink( )?>" class="anime__title title" rows="1">
 													<?php the_title() ?>
 												</a>
 												<div class="rating <?php if (!get_field('status')) {	echo "rating--hide";

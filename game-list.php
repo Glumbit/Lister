@@ -14,7 +14,7 @@ Template Name: games List
 						global $query;
 						$query = new WP_Query( [
 							'post_type' => 'games',
-							'posts_per_page' => 30,
+							'posts_per_page' => 20,
 							'paged' => get_query_var( 'paged' ),
 							'type' => 'list',
 						] );
@@ -53,7 +53,7 @@ Template Name: games List
 								$query->the_post();
 								?>
 									<div class="games__item">
-										<div class="preview <?php if(get_field('rating') == 3) {echo 'preview--great';}?>">
+										<div class="preview">
 											<a href="<?php the_permalink( )?>" class="games__link"></a>
 											<img class="games__background <?php if(get_field('status')["value"] == "not-finished") {echo 'background--no';}?>" src="<?php the_field('image'); ?>" alt="">
 											<div class="games__info">
